@@ -20,4 +20,39 @@
 <p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
 ]]></content>
   </entry>
+  <entry>
+    <title>RPM Packaging Guide</title>
+    <url>/2020/08/31/RPMPackagingGuide/</url>
+    <content><![CDATA[<p>翻译《RPM Packaging Guide》顺便学习一下~</p>
+<a id="more"></a>
+
+<h1 id="绪论"><a href="#绪论" class="headerlink" title="绪论"></a>绪论</h1><p>RPM 打包指导文档：</p>
+<p><strong>准备打包需要的源代码</strong></p>
+<p>这部分为没有软件开发背景的人所写，详见：<a href>准备打包需要的软件</a></p>
+<p><strong>如何将源码打包成rpm包</strong></p>
+<p>这部分介绍将源码打包成rpm包，详见：<a href>打包软件</a></p>
+<p><strong>高级打包技巧</strong></p>
+<p>这部分提供给需要在复杂场景打包的人员作为参考材料，详见：<a href>高级用法</a></p>
+<h2 id="PDF-版本"><a href="#PDF-版本" class="headerlink" title="PDF 版本"></a>PDF 版本</h2><p>你可以在<a href="https://rpm-packaging-guide.github.io/rpm-packaging-guide.pdf" target="_blank" rel="noopener">这里</a>下载文档PDF版本 </p>
+<h2 id="文档规范"><a href="#文档规范" class="headerlink" title="文档规范"></a>文档规范</h2><p>本文使用如下规范：</p>
+<ul>
+<li><p>命令输入以及文本文件的内容，包括源代码以块的方式排列：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ tree ~&#x2F;rpmbuild&#x2F;</span><br><span class="line">&#x2F;home&#x2F;user&#x2F;rpmbuild&#x2F;</span><br><span class="line">|-- BUILD</span><br><span class="line">|-- RPMS</span><br><span class="line"></span><br><span class="line">[command output trimmed]</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Name:           bello</span><br><span class="line">Version:</span><br><span class="line">Release:        1%&#123;?dist&#125;</span><br><span class="line">Summary:</span><br><span class="line"></span><br><span class="line">[file contents trimmed]</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"></span><br><span class="line">print(<span class="string">"Hello World"</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>著作翻译</category>
+      </categories>
+      <tags>
+        <tag>rpm打包</tag>
+      </tags>
+  </entry>
 </search>
