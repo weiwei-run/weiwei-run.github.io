@@ -1,6 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>【单调栈】</title>
+    <url>/2020/10/28/MonotonousStack/</url>
+    <content><![CDATA[<p>一串神秘代码“53124”开启了单调栈的进阶…</p>
+<a id="more"></a>
+
+<p><img src="/2020/10/28/MonotonousStack/MonotonousStack1.png" alt="erchashu"></p>
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>单调栈</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【RPM Packaging Guide】</title>
+    <url>/2020/08/31/RPMPackagingGuide/</url>
+    <content><![CDATA[<p>翻译《RPM Packaging Guide》顺便学习一下~</p>
+<a id="more"></a>
+
+<h1 id="绪论"><a href="#绪论" class="headerlink" title="绪论"></a>绪论</h1><p>RPM 打包指导文档：</p>
+<p><strong>准备打包需要的源代码</strong></p>
+<p>这部分为没有软件开发背景的人所写，详见：<a href>准备打包需要的软件</a></p>
+<p><strong>如何将源码打包成rpm包</strong></p>
+<p>这部分介绍将源码打包成rpm包，详见：<a href>打包软件</a></p>
+<p><strong>高级打包技巧</strong></p>
+<p>这部分提供给需要在复杂场景打包的人员作为参考材料，详见：<a href>高级用法</a></p>
+<h2 id="PDF-版本"><a href="#PDF-版本" class="headerlink" title="PDF 版本"></a>PDF 版本</h2><p>你可以在<a href="https://rpm-packaging-guide.github.io/rpm-packaging-guide.pdf" target="_blank" rel="noopener">这里</a>下载文档PDF版本 </p>
+<h2 id="文档规范"><a href="#文档规范" class="headerlink" title="文档规范"></a>文档规范</h2><p>本文使用如下规范：</p>
+<ul>
+<li><p>命令输入以及文本文件的内容，包括源代码以块的方式排列：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ tree ~&#x2F;rpmbuild&#x2F;</span><br><span class="line">&#x2F;home&#x2F;user&#x2F;rpmbuild&#x2F;</span><br><span class="line">|-- BUILD</span><br><span class="line">|-- RPMS</span><br><span class="line"></span><br><span class="line">[command output trimmed]</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Name:           bello</span><br><span class="line">Version:</span><br><span class="line">Release:        1%&#123;?dist&#125;</span><br><span class="line">Summary:</span><br><span class="line"></span><br><span class="line">[file contents trimmed]</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"></span><br><span class="line">print(<span class="string">"Hello World"</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>著作翻译</category>
+      </categories>
+      <tags>
+        <tag>rpm打包</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【链表与环的探究】</title>
+    <url>/2020/10/26/listAndCircle/</url>
+    <content><![CDATA[<p>最近看了一点 Floyd cycle detection（弗洛伊德判圈算法），觉得有点意思，特此整理了一下…</p>
+<a id="more"></a>
+
+<p><strong>关于一个链表与环可能会遇到的问题</strong>：</p>
+<blockquote>
+<ol>
+<li>判断一个链表是否有环？</li>
+<li>找出环的起始位置；</li>
+<li>找出环的大小；</li>
+<li>求链表的长度：起始位置+环的大小</li>
+<li>如果存在环，求出环上任意一个节点最远的点</li>
+<li>如何判断两个无环链表是否相交</li>
+<li>如果相交，求出第一个相交的点；</li>
+</ol>
+</blockquote>
+<h3 id="判断一个链表是否有环"><a href="#判断一个链表是否有环" class="headerlink" title="判断一个链表是否有环"></a>判断一个链表是否有环</h3><p>快慢指针算法</p>
+<p>// loading…</p>
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>链表</tag>
+        <tag>环</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>【每天学点算法系列】morris遍历</title>
     <url>/2020/09/24/algorithm-leetcode501/</url>
     <content><![CDATA[<p>二叉树的遍历通常O(n)的时间复杂度与O(logn)的空间复杂度，而<strong>morris</strong>遍历实现了O(n)的时间复杂度和O(1)的空间复杂度…</p>
@@ -67,40 +146,5 @@
 
 <p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
 ]]></content>
-  </entry>
-  <entry>
-    <title>【RPM Packaging Guide】</title>
-    <url>/2020/08/31/RPMPackagingGuide/</url>
-    <content><![CDATA[<p>翻译《RPM Packaging Guide》顺便学习一下~</p>
-<a id="more"></a>
-
-<h1 id="绪论"><a href="#绪论" class="headerlink" title="绪论"></a>绪论</h1><p>RPM 打包指导文档：</p>
-<p><strong>准备打包需要的源代码</strong></p>
-<p>这部分为没有软件开发背景的人所写，详见：<a href>准备打包需要的软件</a></p>
-<p><strong>如何将源码打包成rpm包</strong></p>
-<p>这部分介绍将源码打包成rpm包，详见：<a href>打包软件</a></p>
-<p><strong>高级打包技巧</strong></p>
-<p>这部分提供给需要在复杂场景打包的人员作为参考材料，详见：<a href>高级用法</a></p>
-<h2 id="PDF-版本"><a href="#PDF-版本" class="headerlink" title="PDF 版本"></a>PDF 版本</h2><p>你可以在<a href="https://rpm-packaging-guide.github.io/rpm-packaging-guide.pdf" target="_blank" rel="noopener">这里</a>下载文档PDF版本 </p>
-<h2 id="文档规范"><a href="#文档规范" class="headerlink" title="文档规范"></a>文档规范</h2><p>本文使用如下规范：</p>
-<ul>
-<li><p>命令输入以及文本文件的内容，包括源代码以块的方式排列：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ tree ~&#x2F;rpmbuild&#x2F;</span><br><span class="line">&#x2F;home&#x2F;user&#x2F;rpmbuild&#x2F;</span><br><span class="line">|-- BUILD</span><br><span class="line">|-- RPMS</span><br><span class="line"></span><br><span class="line">[command output trimmed]</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Name:           bello</span><br><span class="line">Version:</span><br><span class="line">Release:        1%&#123;?dist&#125;</span><br><span class="line">Summary:</span><br><span class="line"></span><br><span class="line">[file contents trimmed]</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"></span><br><span class="line">print(<span class="string">"Hello World"</span>)</span><br></pre></td></tr></table></figure>
-
-
-
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>著作翻译</category>
-      </categories>
-      <tags>
-        <tag>rpm打包</tag>
-      </tags>
   </entry>
 </search>
