@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>【单调栈】</title>
+    <title>【每天学点算法系列】单调栈</title>
     <url>/2020/10/28/MonotonousStack/</url>
     <content><![CDATA[<p>一串神秘代码“53124”开启了单调栈的进阶…</p>
 <a id="more"></a>
@@ -51,7 +51,7 @@
       </tags>
   </entry>
   <entry>
-    <title>【链表与环的探究】</title>
+    <title>【每天学点算法系列】链表与环的探究</title>
     <url>/2020/10/26/listAndCircle/</url>
     <content><![CDATA[<p>最近看了一点 Floyd cycle detection（弗洛伊德判圈算法），觉得有点意思，特此整理了一下…</p>
 <a id="more"></a>
