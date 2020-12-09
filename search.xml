@@ -16,6 +16,54 @@
       </tags>
   </entry>
   <entry>
+    <title>【每天学点算法系列】morris遍历</title>
+    <url>/2020/09/24/algorithm-leetcode501/</url>
+    <content><![CDATA[<p>二叉树的遍历通常O(n)的时间复杂度与O(logn)的空间复杂度，而<strong>morris</strong>遍历实现了O(n)的时间复杂度和O(1)的空间复杂度…</p>
+<a id="more"></a>
+
+<h3 id="morris遍历的原理"><a href="#morris遍历的原理" class="headerlink" title="morris遍历的原理"></a>morris遍历的原理</h3><blockquote>
+<p>对于没有左子树的节点只达到一次，对于有左子树的节点会到达两次；</p>
+</blockquote>
+<h3 id="morris遍历的实现原则"><a href="#morris遍历的实现原则" class="headerlink" title="morris遍历的实现原则"></a>morris遍历的实现原则</h3><p>记当前节点为cur</p>
+<ol>
+<li>如果cur无左子树，cur右移（cur = cur.right）;</li>
+<li>如果cur有左子树，找到cur左子树最右的节点，记做mostright；<ul>
+<li>如果mostright的right指针为空，则将其指向cur（mostright.right = cur），cur左移（cur = cur.left）;</li>
+<li>如果mostright的right指针指向cur，则将其置为空（mostright.right = null），cur右移（cur = cur.right）;</li>
+</ul>
+</li>
+</ol>
+<p>图示：</p>
+<p><img src="/2020/09/24/algorithm-leetcode501/show.gif" alt="show"></p>
+<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * public class TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     TreeNode left;</span></span><br><span class="line"><span class="comment"> *     TreeNode right;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x) &#123; val = x; &#125;</span></span><br><span class="line"><span class="comment"> * &#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;Integer&gt; <span class="title">inorderTraversal</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">        List&lt;Integer&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        <span class="keyword">if</span> (root == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> list;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//当前节点和前驱节点</span></span><br><span class="line">        TreeNode cur = root;</span><br><span class="line">        TreeNode pre = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//当cur不为null的时候</span></span><br><span class="line">        <span class="keyword">while</span> (cur != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="comment">//如果当前节点没有左儿子，就走右儿子</span></span><br><span class="line">            <span class="keyword">if</span> (cur.left == <span class="keyword">null</span>) &#123;</span><br><span class="line">                list.add(cur.val);</span><br><span class="line">                cur = cur.right;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="comment">//当前节点有左儿子，那么就要找到当前节点的前驱，就是从它的左儿子，然后一直往右走到底。且 不为当前cur节点</span></span><br><span class="line">                pre = cur.left;</span><br><span class="line">                <span class="keyword">while</span> (pre.right != <span class="keyword">null</span> &amp;&amp; pre.right != cur) &#123;</span><br><span class="line">                    pre = pre.right;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">// 如果前驱节点的右节点已经被设置，也就是我们设置过线索了，需要将它右孩子重新设置为空，输出当前节点。</span></span><br><span class="line">                <span class="comment">// cur更新为cur.right，因为因为我们走的是cur.left，如果设置过线索，就说明左边都访问过了，要看右边</span></span><br><span class="line">                <span class="keyword">if</span> (pre.right == cur) &#123;</span><br><span class="line">                    list.add(cur.val);</span><br><span class="line">                    pre.right = <span class="keyword">null</span>;</span><br><span class="line">                    cur = cur.right;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="comment">//如果是第一次访问该节点，也就是还没有设置线索，要设置线索，它的right即为当前节点，然后我们继续看cur.left，因为左边还没设置</span></span><br><span class="line">                    pre.right = cur;</span><br><span class="line">                    cur = cur.left;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> list;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="补充思考"><a href="#补充思考" class="headerlink" title="补充思考"></a>补充思考</h3><p>1、为什么morris遍历的空间复杂度为O(1)，而一遍的遍历为O(logN)呢？怎么计算的？</p>
+<p>一般二叉树的遍历：</p>
+<blockquote>
+<ol>
+<li><strong>先序遍历</strong>：按照 <code>父节点 -&gt; 左孩子 -&gt; 右孩子</code> 的顺序遍历，与DFS（深度优先搜索）有一定联系；</li>
+<li><strong>中序遍历</strong>：按照 <code>左孩子 -&gt; 父节点 -&gt; 右孩子</code> 的顺序遍历。当二叉树为二叉搜索树时，中序遍历返回结果为有序序列，因此也叫顺序遍历；</li>
+<li><strong>后序遍历</strong>：按照 <code>左孩子 -&gt; 右孩子 -&gt; 父节点</code> 的顺序遍历。</li>
+<li><strong>层次遍历</strong>：从左到右，一层一层遍历整个树，与BFS（广度优先搜索）有一定联系。</li>
+</ol>
+</blockquote>
+<p>比如我们用栈来完成一个二叉树的先序遍历，通常是这样：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">preOrderTraversal</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (root == <span class="keyword">null</span>) <span class="keyword">return</span>;</span><br><span class="line">	Stack&lt;TreeNode&gt; stack = <span class="keyword">new</span> Stack&lt;TreeNode&gt;(); <span class="comment">// 利用栈进行临时存储</span></span><br><span class="line">	stack.push(root);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span> (!stack.isEmpty()) &#123;</span><br><span class="line">		TreeNode node = stack.pop(); <span class="comment">// 取出一个节点，表示开始访问以该节点为根的子树</span></span><br><span class="line">		visit(node); <span class="comment">// 首先访问该节点（先序），之后顺序入栈右子树、左子树</span></span><br><span class="line">		<span class="keyword">if</span> (node.right != <span class="keyword">null</span>) stack.push(node.right);</span><br><span class="line">		<span class="keyword">if</span> (node.left != <span class="keyword">null</span>) stack.push(node.left);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果二叉树的结构如图所示，那么栈的大小只要能容纳两个节点就够了，所以这种方法的空间复杂度与二叉树的深度有关，最好和平均为O(logN)，最坏为O(N);</p>
+<p><img src="/2020/09/24/algorithm-leetcode501/erchashu.png" alt="erchashu"></p>
+<p>而Morris遍历却不一样，它通过对子节点引用的更改来实现后续节点的保存，所以仅仅通过O(1)的空间复杂度实现了二叉树的遍历（大神就是不一样…）</p>
+<h3 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h3><p>1、<a href="https://leetcode-cn.com/problems/binary-tree-inorder-traversal/solution/xue-xi-yi-xia-morrissuan-fa-by-jerry_nju-2/" target="_blank" rel="noopener">力扣501题解</a></p>
+<p>2、<a href="https://ghh3809.github.io/2018/08/06/morris-traversal/" target="_blank" rel="noopener">经典算法小评</a></p>
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>morris算法</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>【RPM Packaging Guide】</title>
     <url>/2020/08/31/RPMPackagingGuide/</url>
     <content><![CDATA[<p>翻译《RPM Packaging Guide》顺便学习一下~</p>
@@ -69,54 +117,6 @@
 
 <p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
 ]]></content>
-  </entry>
-  <entry>
-    <title>【每天学点算法系列】morris遍历</title>
-    <url>/2020/09/24/algorithm-leetcode501/</url>
-    <content><![CDATA[<p>二叉树的遍历通常O(n)的时间复杂度与O(logn)的空间复杂度，而<strong>morris</strong>遍历实现了O(n)的时间复杂度和O(1)的空间复杂度…</p>
-<a id="more"></a>
-
-<h3 id="morris遍历的原理"><a href="#morris遍历的原理" class="headerlink" title="morris遍历的原理"></a>morris遍历的原理</h3><blockquote>
-<p>对于没有左子树的节点只达到一次，对于有左子树的节点会到达两次；</p>
-</blockquote>
-<h3 id="morris遍历的实现原则"><a href="#morris遍历的实现原则" class="headerlink" title="morris遍历的实现原则"></a>morris遍历的实现原则</h3><p>记当前节点为cur</p>
-<ol>
-<li>如果cur无左子树，cur右移（cur = cur.right）;</li>
-<li>如果cur有左子树，找到cur左子树最右的节点，记做mostright；<ul>
-<li>如果mostright的right指针为空，则将其指向cur（mostright.right = cur），cur左移（cur = cur.left）;</li>
-<li>如果mostright的right指针指向cur，则将其置为空（mostright.right = null），cur右移（cur = cur.right）;</li>
-</ul>
-</li>
-</ol>
-<p>图示：</p>
-<p><img src="/2020/09/24/algorithm-leetcode501/show.gif" alt="show"></p>
-<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * public class TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     TreeNode left;</span></span><br><span class="line"><span class="comment"> *     TreeNode right;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x) &#123; val = x; &#125;</span></span><br><span class="line"><span class="comment"> * &#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;Integer&gt; <span class="title">inorderTraversal</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">        List&lt;Integer&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        <span class="keyword">if</span> (root == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> list;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//当前节点和前驱节点</span></span><br><span class="line">        TreeNode cur = root;</span><br><span class="line">        TreeNode pre = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//当cur不为null的时候</span></span><br><span class="line">        <span class="keyword">while</span> (cur != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="comment">//如果当前节点没有左儿子，就走右儿子</span></span><br><span class="line">            <span class="keyword">if</span> (cur.left == <span class="keyword">null</span>) &#123;</span><br><span class="line">                list.add(cur.val);</span><br><span class="line">                cur = cur.right;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="comment">//当前节点有左儿子，那么就要找到当前节点的前驱，就是从它的左儿子，然后一直往右走到底。且 不为当前cur节点</span></span><br><span class="line">                pre = cur.left;</span><br><span class="line">                <span class="keyword">while</span> (pre.right != <span class="keyword">null</span> &amp;&amp; pre.right != cur) &#123;</span><br><span class="line">                    pre = pre.right;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">// 如果前驱节点的右节点已经被设置，也就是我们设置过线索了，需要将它右孩子重新设置为空，输出当前节点。</span></span><br><span class="line">                <span class="comment">// cur更新为cur.right，因为因为我们走的是cur.left，如果设置过线索，就说明左边都访问过了，要看右边</span></span><br><span class="line">                <span class="keyword">if</span> (pre.right == cur) &#123;</span><br><span class="line">                    list.add(cur.val);</span><br><span class="line">                    pre.right = <span class="keyword">null</span>;</span><br><span class="line">                    cur = cur.right;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="comment">//如果是第一次访问该节点，也就是还没有设置线索，要设置线索，它的right即为当前节点，然后我们继续看cur.left，因为左边还没设置</span></span><br><span class="line">                    pre.right = cur;</span><br><span class="line">                    cur = cur.left;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> list;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="补充思考"><a href="#补充思考" class="headerlink" title="补充思考"></a>补充思考</h3><p>1、为什么morris遍历的空间复杂度为O(1)，而一遍的遍历为O(logN)呢？怎么计算的？</p>
-<p>一般二叉树的遍历：</p>
-<blockquote>
-<ol>
-<li><strong>先序遍历</strong>：按照 <code>父节点 -&gt; 左孩子 -&gt; 右孩子</code> 的顺序遍历，与DFS（深度优先搜索）有一定联系；</li>
-<li><strong>中序遍历</strong>：按照 <code>左孩子 -&gt; 父节点 -&gt; 右孩子</code> 的顺序遍历。当二叉树为二叉搜索树时，中序遍历返回结果为有序序列，因此也叫顺序遍历；</li>
-<li><strong>后序遍历</strong>：按照 <code>左孩子 -&gt; 右孩子 -&gt; 父节点</code> 的顺序遍历。</li>
-<li><strong>层次遍历</strong>：从左到右，一层一层遍历整个树，与BFS（广度优先搜索）有一定联系。</li>
-</ol>
-</blockquote>
-<p>比如我们用栈来完成一个二叉树的先序遍历，通常是这样：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">preOrderTraversal</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (root == <span class="keyword">null</span>) <span class="keyword">return</span>;</span><br><span class="line">	Stack&lt;TreeNode&gt; stack = <span class="keyword">new</span> Stack&lt;TreeNode&gt;(); <span class="comment">// 利用栈进行临时存储</span></span><br><span class="line">	stack.push(root);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span> (!stack.isEmpty()) &#123;</span><br><span class="line">		TreeNode node = stack.pop(); <span class="comment">// 取出一个节点，表示开始访问以该节点为根的子树</span></span><br><span class="line">		visit(node); <span class="comment">// 首先访问该节点（先序），之后顺序入栈右子树、左子树</span></span><br><span class="line">		<span class="keyword">if</span> (node.right != <span class="keyword">null</span>) stack.push(node.right);</span><br><span class="line">		<span class="keyword">if</span> (node.left != <span class="keyword">null</span>) stack.push(node.left);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>如果二叉树的结构如图所示，那么栈的大小只要能容纳两个节点就够了，所以这种方法的空间复杂度与二叉树的深度有关，最好和平均为O(logN)，最坏为O(N);</p>
-<p><img src="/2020/09/24/algorithm-leetcode501/erchashu.png" alt="erchashu"></p>
-<p>而Morris遍历却不一样，它通过对子节点引用的更改来实现后续节点的保存，所以仅仅通过O(1)的空间复杂度实现了二叉树的遍历（大神就是不一样…）</p>
-<h3 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h3><p>1、<a href="https://leetcode-cn.com/problems/binary-tree-inorder-traversal/solution/xue-xi-yi-xia-morrissuan-fa-by-jerry_nju-2/" target="_blank" rel="noopener">力扣501题解</a></p>
-<p>2、<a href="https://ghh3809.github.io/2018/08/06/morris-traversal/" target="_blank" rel="noopener">经典算法小评</a></p>
-]]></content>
-      <categories>
-        <category>算法</category>
-      </categories>
-      <tags>
-        <tag>morris算法</tag>
-      </tags>
   </entry>
   <entry>
     <title>【每天学点算法系列】链表与环的探究</title>
