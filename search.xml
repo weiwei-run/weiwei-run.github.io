@@ -229,4 +229,32 @@
         <tag>科学上网</tag>
       </tags>
   </entry>
+  <entry>
+    <title>【马赛克图片处理】</title>
+    <url>/2021/01/04/Mosaic/</url>
+    <content><![CDATA[<p>之后遇到好玩的github项目会动手去跑一遍，并记录下来…本次分析的是github 3天收割7K star的爆款项目Depix</p>
+<a id="more"></a>
+
+<p>Depix是用于解析打码后的图像，不过首先我们要了解一下马赛克的基本知识。</p>
+<blockquote>
+<p>马赛克指一种图像（视频）处理手段，此手段将影像特定区域的色阶细节劣化并造成色块打乱的效果，因为这种模糊看上去由一个个的小格子组成，便形象的称这种画面为马赛克。其目的通常是使之无法辨认。</p>
+</blockquote>
+<blockquote>
+<p>马赛克的作用就是为破坏其背后图像的细节！这是不可逆的，后期处理并不能真正恢复马赛克后面图像的原有细节！任何人或软件都不能去掉马赛克让图像真正恢复原来的效果！</p>
+</blockquote>
+<blockquote>
+<p>马赛克不能被还原，现在都是AI通过后台大量的素材库去猜原图可能会是什么样子，然后使用相同的方法去打码，再和打码后的图像进行比对，以此来达到目的；</p>
+</blockquote>
+<p><strong>结论：目前来说基本上没有任何一种完全有效的技术能去除马赛克，尤其是静态图片。</strong></p>
+<p>参考：</p>
+<p>1.<a href="https://zhuanlan.zhihu.com/p/337593391" target="_blank" rel="noopener">AI看透你的小心思</a></p>
+<p>2.<a href="https://zhuanlan.zhihu.com/p/158047094" target="_blank" rel="noopener">马赛克到底能不能被消除</a></p>
+]]></content>
+      <categories>
+        <category>github项目</category>
+      </categories>
+      <tags>
+        <tag>马赛克处理</tag>
+      </tags>
+  </entry>
 </search>
