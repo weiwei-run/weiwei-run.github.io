@@ -250,10 +250,10 @@
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">python depix.py -p images/testimages/testimage3_pixels.png -s images/searchimages/debruinseq_notepad_Windows10_closeAndSpaced.png -o output.png</span><br></pre></td></tr></table></figure>
 
 <p>结果发现还是不错的，对比出来的效果基本和docs中描述的一致，原理就是和预先设置好的德布鲁因序列（searchimages）进行匹配，如果一致则猜测原图的字母排列；当然我说的比较简单，中间还有很多细节，不过大体如此；</p>
-<p>![image-20210122084927955](/Users/Jai_XIAO/Library/Application Support/typora-user-images/image-20210122084927955.png)</p>
-<p><img src="/Users/Jai_XIAO/Documents/masaike/Depix/docs/img/Recovering_prototype_latest.png" alt="Recovering_prototype_latest"></p>
+<p><img src="/2021/01/04/Mosaic/image-20210122084927955.png" alt="image-20210122084927955"></p>
+<p><img src="/2021/01/04/Mosaic/Recovering_prototype_latest.png" alt="Recovering_prototype_latest"></p>
 <p>好了，然后我拿到了朋友的微信圈分享图，开始尝试Depix是不是可以处理呢？（纯学术研究，图片已经进行了敏感信息处理）</p>
-<p>![image-20210122085358263](/Users/Jai_XIAO/Library/Application Support/typora-user-images/image-20210122085358263.png)</p>
+<p><img src="/2021/01/04/Mosaic/image-20210122085358263.png" alt="image-20210122085358263"></p>
 <p>看到这张图你就感觉不太可能复原，或者猜出隐藏的内容；</p>
 <p>1、Depix就是能用，但是你没有中文的德布鲁因序列图，怎么查？</p>
 <p>2、马赛克的风格有明显不同，该图至少用了两种马赛克的打码，不同的马赛克生成格式一致么？</p>

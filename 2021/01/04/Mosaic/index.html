@@ -131,13 +131,15 @@
 <meta property="og:url" content="http://weiwei.run/2021/01/04/Mosaic/index.html">
 <meta property="og:site_name" content="traffic_millions">
 <meta property="og:description" content="朋友在微信圈发了一张图，分享了2020年初立下的flag，不过有部分内容还打码了，可能是不想让人家看到她在想啥。记得早些时候关注过Depix项目，想着是不是可以用这个项目来解析朋友在圈里发的马赛克照片呢，于是看了一下…">
-<meta property="og:image" content="http://weiwei.run/Users/Jai_XIAO/Documents/masaike/Depix/docs/img/Recovering_prototype_latest.png">
+<meta property="og:image" content="http://weiwei.run/2021/01/04/Mosaic/image-20210122084927955.png">
+<meta property="og:image" content="http://weiwei.run/2021/01/04/Mosaic/Recovering_prototype_latest.png">
+<meta property="og:image" content="http://weiwei.run/2021/01/04/Mosaic/image-20210122085358263.png">
 <meta property="article:published_time" content="2021-01-03T23:34:31.000Z">
-<meta property="article:modified_time" content="2021-01-22T00:59:49.265Z">
+<meta property="article:modified_time" content="2021-01-23T03:55:28.726Z">
 <meta property="article:author" content="weiwei">
 <meta property="article:tag" content="马赛克处理">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://weiwei.run/Users/Jai_XIAO/Documents/masaike/Depix/docs/img/Recovering_prototype_latest.png">
+<meta name="twitter:image" content="http://weiwei.run/2021/01/04/Mosaic/image-20210122084927955.png">
 
 
 
@@ -477,10 +479,10 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python depix.py -p images/testimages/testimage3_pixels.png -s images/searchimages/debruinseq_notepad_Windows10_closeAndSpaced.png -o output.png</span><br></pre></td></tr></table></figure>
 
 <p>结果发现还是不错的，对比出来的效果基本和docs中描述的一致，原理就是和预先设置好的德布鲁因序列（searchimages）进行匹配，如果一致则猜测原图的字母排列；当然我说的比较简单，中间还有很多细节，不过大体如此；</p>
-<p>![image-20210122084927955](/Users/Jai_XIAO/Library/Application Support/typora-user-images/image-20210122084927955.png)</p>
-<p><img src="/Users/Jai_XIAO/Documents/masaike/Depix/docs/img/Recovering_prototype_latest.png" alt="Recovering_prototype_latest"></p>
+<p><img src="/2021/01/04/Mosaic/image-20210122084927955.png" alt="image-20210122084927955"></p>
+<p><img src="/2021/01/04/Mosaic/Recovering_prototype_latest.png" alt="Recovering_prototype_latest"></p>
 <p>好了，然后我拿到了朋友的微信圈分享图，开始尝试Depix是不是可以处理呢？（纯学术研究，图片已经进行了敏感信息处理）</p>
-<p>![image-20210122085358263](/Users/Jai_XIAO/Library/Application Support/typora-user-images/image-20210122085358263.png)</p>
+<p><img src="/2021/01/04/Mosaic/image-20210122085358263.png" alt="image-20210122085358263"></p>
 <p>看到这张图你就感觉不太可能复原，或者猜出隐藏的内容；</p>
 <p>1、Depix就是能用，但是你没有中文的德布鲁因序列图，怎么查？</p>
 <p>2、马赛克的风格有明显不同，该图至少用了两种马赛克的打码，不同的马赛克生成格式一致么？</p>
