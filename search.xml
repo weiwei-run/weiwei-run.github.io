@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>【每天学点算法系列】单调栈</title>
+    <url>/2020/10/28/MonotonousStack/</url>
+    <content><![CDATA[<p>一串神秘代码“53124”开启了单调栈的进阶…</p>
+<a id="more"></a>
+
+<p><img src="/2020/10/28/MonotonousStack/MonotonousStack1.png" alt="erchashu"></p>
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>单调栈</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>【马赛克图片处理】</title>
     <url>/2021/01/04/Mosaic/</url>
     <content><![CDATA[<p>朋友在微信圈发了一张图，分享了2020年初立下的flag，不过有部分内容还打码了，可能是不想让人家看到她在想啥。记得早些时候关注过Depix项目，想着是不是可以用这个项目来解析朋友在圈里发的马赛克照片呢，于是看了一下…</p>
@@ -42,19 +57,59 @@
       </tags>
   </entry>
   <entry>
-    <title>【每天学点算法系列】单调栈</title>
-    <url>/2020/10/28/MonotonousStack/</url>
-    <content><![CDATA[<p>一串神秘代码“53124”开启了单调栈的进阶…</p>
+    <title>【RPM Packaging Guide】</title>
+    <url>/2020/08/31/RPMPackagingGuide/</url>
+    <content><![CDATA[<p>翻译《RPM Packaging Guide》顺便学习一下~</p>
 <a id="more"></a>
 
-<p><img src="/2020/10/28/MonotonousStack/MonotonousStack1.png" alt="erchashu"></p>
+<h1 id="绪论"><a href="#绪论" class="headerlink" title="绪论"></a>绪论</h1><p>RPM 打包指导文档：</p>
+<p><strong>准备打包需要的源代码</strong></p>
+<p>这部分为没有软件开发背景的人所写，详见：<a href>准备打包需要的软件</a></p>
+<p><strong>如何将源码打包成rpm包</strong></p>
+<p>这部分介绍将源码打包成rpm包，详见：<a href>打包软件</a></p>
+<p><strong>高级打包技巧</strong></p>
+<p>这部分提供给需要在复杂场景打包的人员作为参考材料，详见：<a href>高级用法</a></p>
+<h2 id="PDF-版本"><a href="#PDF-版本" class="headerlink" title="PDF 版本"></a>PDF 版本</h2><p>你可以在<a href="https://rpm-packaging-guide.github.io/rpm-packaging-guide.pdf" target="_blank" rel="noopener">这里</a>下载文档PDF版本 </p>
+<h2 id="文档规范"><a href="#文档规范" class="headerlink" title="文档规范"></a>文档规范</h2><p>本文使用如下规范：</p>
+<ul>
+<li><p>命令输入以及文本文件的内容，包括源代码以块的方式排列：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ tree ~&#x2F;rpmbuild&#x2F;</span><br><span class="line">&#x2F;home&#x2F;user&#x2F;rpmbuild&#x2F;</span><br><span class="line">|-- BUILD</span><br><span class="line">|-- RPMS</span><br><span class="line"></span><br><span class="line">[command output trimmed]</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Name:           bello</span><br><span class="line">Version:</span><br><span class="line">Release:        1%&#123;?dist&#125;</span><br><span class="line">Summary:</span><br><span class="line"></span><br><span class="line">[file contents trimmed]</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"></span><br><span class="line">print(<span class="string">"Hello World"</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
 ]]></content>
       <categories>
-        <category>算法</category>
+        <category>著作翻译</category>
       </categories>
       <tags>
-        <tag>单调栈</tag>
+        <tag>rpm打包</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>【Hello World】</title>
+    <url>/2020/07/21/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+<a id="more"></a>
+
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+]]></content>
   </entry>
   <entry>
     <title>【每天学点算法系列】morris遍历</title>
@@ -103,26 +158,6 @@
       <tags>
         <tag>morris算法</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>【Hello World】</title>
-    <url>/2020/07/21/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<a id="more"></a>
-
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-]]></content>
   </entry>
   <entry>
     <title>【每天学点算法系列】链表与环的探究</title>
@@ -233,41 +268,6 @@
       </categories>
       <tags>
         <tag>科学上网</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>【RPM Packaging Guide】</title>
-    <url>/2020/08/31/RPMPackagingGuide/</url>
-    <content><![CDATA[<p>翻译《RPM Packaging Guide》顺便学习一下~</p>
-<a id="more"></a>
-
-<h1 id="绪论"><a href="#绪论" class="headerlink" title="绪论"></a>绪论</h1><p>RPM 打包指导文档：</p>
-<p><strong>准备打包需要的源代码</strong></p>
-<p>这部分为没有软件开发背景的人所写，详见：<a href>准备打包需要的软件</a></p>
-<p><strong>如何将源码打包成rpm包</strong></p>
-<p>这部分介绍将源码打包成rpm包，详见：<a href>打包软件</a></p>
-<p><strong>高级打包技巧</strong></p>
-<p>这部分提供给需要在复杂场景打包的人员作为参考材料，详见：<a href>高级用法</a></p>
-<h2 id="PDF-版本"><a href="#PDF-版本" class="headerlink" title="PDF 版本"></a>PDF 版本</h2><p>你可以在<a href="https://rpm-packaging-guide.github.io/rpm-packaging-guide.pdf" target="_blank" rel="noopener">这里</a>下载文档PDF版本 </p>
-<h2 id="文档规范"><a href="#文档规范" class="headerlink" title="文档规范"></a>文档规范</h2><p>本文使用如下规范：</p>
-<ul>
-<li><p>命令输入以及文本文件的内容，包括源代码以块的方式排列：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ tree ~&#x2F;rpmbuild&#x2F;</span><br><span class="line">&#x2F;home&#x2F;user&#x2F;rpmbuild&#x2F;</span><br><span class="line">|-- BUILD</span><br><span class="line">|-- RPMS</span><br><span class="line"></span><br><span class="line">[command output trimmed]</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Name:           bello</span><br><span class="line">Version:</span><br><span class="line">Release:        1%&#123;?dist&#125;</span><br><span class="line">Summary:</span><br><span class="line"></span><br><span class="line">[file contents trimmed]</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"></span><br><span class="line">print(<span class="string">"Hello World"</span>)</span><br></pre></td></tr></table></figure>
-
-
-
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>著作翻译</category>
-      </categories>
-      <tags>
-        <tag>rpm打包</tag>
       </tags>
   </entry>
 </search>
