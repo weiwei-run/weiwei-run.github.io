@@ -16,7 +16,7 @@
       </tags>
   </entry>
   <entry>
-    <title>【马赛克图片处理】</title>
+    <title>【Depix】马赛克图片处理</title>
     <url>/2021/01/04/Mosaic/</url>
     <content><![CDATA[<p>朋友在微信圈发了一张图，分享了2020年初立下的flag，不过有部分内容还打码了，可能是不想让人家看到她在想啥。记得早些时候关注过Depix项目，想着是不是可以用这个项目来解析朋友在圈里发的马赛克照片呢，于是看了一下…</p>
 <a id="more"></a>
@@ -268,6 +268,21 @@
       </categories>
       <tags>
         <tag>科学上网</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【multi-agent-simulation】社会力模型演示</title>
+    <url>/2021/01/31/multi-agent-simulation/</url>
+    <content><![CDATA[<p>近日有幸接触到robot跟随方面的研究，而跟随方向的论文大都提到了Social force model【社会力模型】，这个概念最早可追溯到Dirk Helbing在1995年的论文[Social force model for pedestrian dynamics]….</p>
+<a id="more"></a>
+
+<p>loading…</p>
+]]></content>
+      <categories>
+        <category>github项目</category>
+      </categories>
+      <tags>
+        <tag>社会力模型</tag>
       </tags>
   </entry>
 </search>

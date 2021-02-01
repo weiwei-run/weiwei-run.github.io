@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://weiwei.run/2021/01/31/multi-agent-simulation/</loc>
+    <lastmod>2021-02-01</lastmod>
+  </url>
+  <url>
     <loc>http://weiwei.run/2021/01/04/Mosaic/</loc>
-    <lastmod>2021-01-23</lastmod>
+    <lastmod>2021-01-30</lastmod>
   </url>
   <url>
     <loc>http://weiwei.run/2020/07/21/hello-world/</loc>
