@@ -276,7 +276,21 @@
     <content><![CDATA[<p>近日有幸接触到robot跟随方面的研究，而跟随方向的论文大都提到了Social force model【社会力模型】，这个概念最早可追溯到Dirk Helbing在1995年的论文[Social force model for pedestrian dynamics]….</p>
 <a id="more"></a>
 
-<p>loading…</p>
+<h3 id="论文"><a href="#论文" class="headerlink" title="论文"></a>论文</h3><p><img src="/2021/01/31/multi-agent-simulation/IMG_0010.jpg" alt="IMG_0010"></p>
+<p>大致就是我上面描述的这个意思，核心思想就是把微观世界中的相互作用力引入到宏观世界，比如人类社会；一个人如果想要跟随另一个人应该怎么运动才能避免碰撞到周围的人，同时又能很好地跟随目标，社会力模型提供了一个思路。</p>
+<p>注：社会力模型在不同的论文中有很多变化，考虑的维度也不一样如果你认为我说的不对，那么以你的为准；</p>
+<h3 id="github项目"><a href="#github项目" class="headerlink" title="github项目"></a>github项目</h3><p><a href="https://github.com/my-HenryS/multi-agent-simulation" target="_blank" rel="noopener">multi-agent-simulation</a>是github上一个开源项目，时间比较久了博主后面基本没怎么维护，不过拿来跑跑，看一下效果还是可以的；配置好maven，JDK，直接导入，运行SimulationPanelMain；</p>
+<p>项目具体描述参考readme文件</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">欲开始运行仿真请打开app包，并运行其中的一个Main程序。Gui内的SimulationPanelMain是可视化的仿真界面，主要用于演示；Console内的TextOutputMain是可以将运行结果以字符串形式输出的Main程序，主要用于输出具体的数据以便实验使用。</span><br><span class="line"></span><br><span class="line">项目分为5个package，分别为app、container、drawer、geom、model</span><br></pre></td></tr></table></figure>
+
+
+
+<p>![Screen Shot 2021-02-04 at 06.54.16](multi-agent-simulation/Screen Shot 2021-02-04 at 06.54.16.png)</p>
+<p>运行成功之后会出现如下所示，选择Simulation Mode，然后可以选择模拟的场景，比如：ApplicationForSubway</p>
+<p><img src="/2021/01/31/multi-agent-simulation/image-20210204065949988.png" alt="image-20210204065949988"></p>
+<p>目前只看到了subway和Cross Flow场景是可以正常run起来的，其他的场景估计要加载配置，不过效果就是这样；相关的算法，节点数量，障碍物设置都是可以自己调整的，对于整个社会力模型的认识是有帮助的；如果做跟随路径规划，也可以在模型中先跑一跑看一下效果；</p>
+<p>![2021-02-04 07.05.50](multi-agent-simulation/2021-02-04 07.05.50.gif)</p>
+<p>好了本次的github项目分享就到这里，后面看到有趣的好玩的github项目，会继续发出来让更多的人知道…</p>
 ]]></content>
       <categories>
         <category>github项目</category>
