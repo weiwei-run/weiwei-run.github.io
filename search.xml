@@ -307,9 +307,12 @@
 <p>1、首先点击事件会传递给launcher；Launcher其实也是一个app，它是我们开机之后看到的第一个app，它主要用于显示和管理手机上的其他应用，你也可以自己制作一个launcher，比如：</p>
 <p><img src="/2021/02/05/AndroidColumn/WechatIMG3.jpeg" alt="WechatIMG3"></p>
 <p>2、点击事件会由launcher构造成一个Intent意图，然后通过startActivity方法传递给ActivityManagerService；AMS是在SystemServer进程中启动的，它比launcher初始化要更早一些；</p>
-<p>3、然后AMS通过Process.start方法通知到Zygote进程；Zygote进程比SystemServer进程还要早一些存在；(关于进程之间的存在先后顺序参考下图)</p>
+<p>3、然后AMS通过Process.start方法通知到Zygote进程；Zygote进程比SystemServer进程还要早一些存在；关于进程之间的存在先后顺序参考下图，整个Android系统的启动分为linux kernel的启动和android的启动，linux kernel运行起来之后，Android的第一个程序就是init process，主要是一些配置和解析动作，然后就陷入了等待；</p>
+<p>很明显能够看出Zygote进程是先于System Server进程之前启动的，且后者是前者fork出来的进程；</p>
+<p><img src="/2021/02/05/AndroidColumn/IMG_4C4BD5625EC8-1.jpeg" alt="IMG_4C4BD5625EC8-1"></p>
 <p>4、Zygote收到AMS的通知后会fork一个新的进程，而新的进程会从新启应用的ActivityThread开始运行，加载app，创建一个activity对象，这些都是在ActivityThread的mainLoop方法中执行的，然后ActivityThread就陷入了循环；</p>
 <p>5、最后ActivityManagerService回调上一步创建activity对象的生命周期方法，onCreate、onStart、onResume然后你就能看到新启应用的页面啦，实际上还有很多细节，不过大致流程就是这样。</p>
+<p><img src="/2021/02/05/AndroidColumn/IMG_4611D38DE043-1.jpeg" alt="IMG_4611D38DE043-1"></p>
 <h2 id="基础概念"><a href="#基础概念" class="headerlink" title="基础概念"></a>基础概念</h2><p>1、apk是由什么组成的？</p>
 <p><img src="/2021/02/05/AndroidColumn/image-20210205072610547.png" alt="image-20210205072610547"></p>
 <p>找了一个Google浏览器的安装包，解压缩可以看到有AndroidManifest.xml、assets文件夹、dex文件、lib文件夹、META-INF文件夹、res文件夹、一个arsc文件和一个sha256文件；</p>
@@ -335,9 +338,33 @@
 <li><p>sha256文件：校验相关的，一般apk包里也没有；</p>
 </li>
 </ul>
-<h2 id="四大组件"><a href="#四大组件" class="headerlink" title="四大组件"></a>四大组件</h2><h2 id="Activity生命周期"><a href="#Activity生命周期" class="headerlink" title="Activity生命周期"></a>Activity生命周期</h2><h2 id="Activity状态转移"><a href="#Activity状态转移" class="headerlink" title="Activity状态转移"></a>Activity状态转移</h2><h2 id="ContentProvider"><a href="#ContentProvider" class="headerlink" title="ContentProvider"></a>ContentProvider</h2><h2 id="Service"><a href="#Service" class="headerlink" title="Service"></a>Service</h2><h2 id="BroadcastReceiver"><a href="#BroadcastReceiver" class="headerlink" title="BroadcastReceiver"></a>BroadcastReceiver</h2><p>参考文档：</p>
+<h2 id="四大组件"><a href="#四大组件" class="headerlink" title="四大组件"></a>四大组件</h2><ul>
+<li>Activity 包含用户界面的组件，主要用于和用户进行交互；</li>
+<li>ContentProvider 用于在不同的应用程序之间实现数据共享功能；</li>
+<li>Service 实现程序后台运行的解决方案，非常适合那些不需要和用户交互而且还要求长期运行的任务；</li>
+<li>BroadcastReceiver Android中的广播机制；</li>
+</ul>
+<p>四大组件都需要在AndroidManifest注册才能起作用；</p>
+<h2 id="Activity生命周期"><a href="#Activity生命周期" class="headerlink" title="Activity生命周期"></a>Activity生命周期</h2><p><img src="/2021/02/05/AndroidColumn/IMG_C6B5DC689770-1.jpeg" alt="IMG_C6B5DC689770-1"></p>
+<p>1、比如一个activity正在处于界面能与用户交互，突然弹出来一个提醒对话框，抢走了之前activity的焦点，但是并没有完全将其遮蔽，那么前一个activity的状态转移是怎样的？</p>
+<p>onResume(能与用户交互)—&gt;onPause(由于弹出提醒对话框被夺走了焦点)</p>
+<ul>
+<li>如果此时用户X掉了对话框，切换回了之前的界面，那么应该走到onResume；</li>
+<li>如果此时用户放大的对话框，导致activity完全不可见，那么应该走到onStop；</li>
+</ul>
+<h2 id="ContentProvider"><a href="#ContentProvider" class="headerlink" title="ContentProvider"></a>ContentProvider</h2><p>ContentProvider提供了应用程序之间共享数据的方法；应用程序通过ContentProvider访问数据而不需要关心数据具体存储及访问过程，这样既提高了数据的访问效率，同时也保护了数据；</p>
+<p><img src="/2021/02/05/AndroidColumn/IMG_1FD13F738572-1.jpeg" alt="IMG_1FD13F738572-1"></p>
+<p>1、补充一个知识点：URL与URI的区别</p>
+<ul>
+<li>URL是标示资源的物理位置，相当于文件的路径，如<a href="http://www.baidu.com" target="_blank" rel="noopener">http://www.baidu.com</a></li>
+<li>URI则是标示资源的逻辑位置，并不提供资源的具体位置，如content://contract/people</li>
+</ul>
+<h2 id="Service"><a href="#Service" class="headerlink" title="Service"></a>Service</h2><h2 id="BroadcastReceiver"><a href="#BroadcastReceiver" class="headerlink" title="BroadcastReceiver"></a>BroadcastReceiver</h2><p>参考文档：</p>
 <ol>
-<li><a href="https://developer.android.google.cn/guide?hl=zh_cn" target="_blank" rel="noopener">Android Developers</a></li>
+<li><p><a href="https://developer.android.google.cn/guide?hl=zh_cn" target="_blank" rel="noopener">Android Developers</a></p>
+</li>
+<li><p><a href="https://www.cnblogs.com/lao-liang/p/5067312.html" target="_blank" rel="noopener">Android系统启动分析</a></p>
+</li>
 </ol>
 ]]></content>
       <categories>
