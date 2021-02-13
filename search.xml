@@ -359,7 +359,28 @@
 <li>URL是标示资源的物理位置，相当于文件的路径，如<a href="http://www.baidu.com" target="_blank" rel="noopener">http://www.baidu.com</a></li>
 <li>URI则是标示资源的逻辑位置，并不提供资源的具体位置，如content://contract/people</li>
 </ul>
-<h2 id="Service"><a href="#Service" class="headerlink" title="Service"></a>Service</h2><h2 id="BroadcastReceiver"><a href="#BroadcastReceiver" class="headerlink" title="BroadcastReceiver"></a>BroadcastReceiver</h2><p>参考文档：</p>
+<h2 id="Service"><a href="#Service" class="headerlink" title="Service"></a>Service</h2><p>Service是Android中实现程序后台运行的解决方案。但是服务并不是运行在一个独立的进程当中，而是依赖于创建服务时所在的应用程序进程，当某个应用程序进程被杀掉时，所有依赖于该进程的服务也会停止运行。</p>
+<h3 id="Android多线程编程"><a href="#Android多线程编程" class="headerlink" title="Android多线程编程"></a>Android多线程编程</h3><p>首先和许多其他的GUI库一样，Android的UI也是线程不安全的。如果想要更新应用程序中的UI元素，则必须在主线程中进行，否则就会出现异常。</p>
+<p><img src="/2021/02/05/AndroidColumn/image-20210214072108173.png" alt="image-20210214072108173"></p>
+<p>比如，直接在子线程中进行更新UI的操作，程序就会异常停止报“CalledFromWrongThreadException”；有些时候我们需要根据子线程的执行结果来更新相应的UI控件，那么应该怎么操作呢？Android的异步消息处理机制完美解决了这个问题，子线程中构造一个message对象，并通过handler的sendMessage方法将该对象发送出去，那么Handler就会收到这条消息，并在handleMessage方法中进行处理；而handleMessage方法中的代码就是在主线程中运行的，所以不会有上面的CalledFromWrongThreadException；</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">private</span> Handler handler = <span class="keyword">new</span> Handler() &#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handleMessage</span><span class="params">(Message msg)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">switch</span> (msg.what) &#123;</span><br><span class="line">                <span class="keyword">case</span> UPDATE_TEXT:</span><br><span class="line">                    <span class="comment">// 在这里可以进行UI操作</span></span><br><span class="line">                    text.setText(<span class="string">"Nice to meet you"</span>);</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">default</span>:</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="/2021/02/05/AndroidColumn/image-20210214072805210.png" alt="image-20210214072805210"></p>
+<h3 id="异步消息处理机制详解"><a href="#异步消息处理机制详解" class="headerlink" title="异步消息处理机制详解"></a>异步消息处理机制详解</h3><p>Android中的异步消息处理主要由四部分组成：</p>
+<ul>
+<li>Message: 用于线程之间传递消息，what子段，arg1、arg2、obj字段；</li>
+<li>Handler: 消息处理者，发送消息一般使用Handler的sendMessage方法，而发出的消息经过一系列辗转，最终会传递到Handler的handleMessage方法中；</li>
+<li>MessageQueue: 用于存放所有通过Handler发送的消息，每个线程中只会有一个MessageQueue对象；</li>
+<li>Looper: 每个线程中的MessageQueue的管家，调用Looper的loop方法后，就会进入到一个无限的循环当中，然后每当发现MessageQueue中存在一条消息，就会将它取出，并传递到Handler的handleMessage方法中。每个线程也只会有一个Looper对象；</li>
+</ul>
+<p><img src="/2021/02/05/AndroidColumn/IMG_D6D1AC18EFAE-1.png" alt="IMG_D6D1AC18EFAE-1"></p>
+<p>1、首先需要在主线程中创建一个Handler对象，并重写handleMessage方法；</p>
+<p>2、当子线程中的UI需要更新时，创建一个Message对象，并且通过Handler对象调用sendMessage方法，将这条消息发送出去；</p>
+<p>3、这条消息就被添加到MessageQueue队列中等待被处理，而Looper则会一直尝试从MessageQueue中取出待处理的消息，最后发回给Handler的handlerMessage方法中。</p>
+<p>4、由于Handler是在主线程中创建的，所以此时handleMessage方法中的代码也会在主线程中运行；</p>
+<h2 id="BroadcastReceiver"><a href="#BroadcastReceiver" class="headerlink" title="BroadcastReceiver"></a>BroadcastReceiver</h2><p>参考文档：</p>
 <ol>
 <li><p><a href="https://developer.android.google.cn/guide?hl=zh_cn" target="_blank" rel="noopener">Android Developers</a></p>
 </li>
