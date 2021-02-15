@@ -412,4 +412,23 @@
         <tag>代码整洁之道</tag>
       </tags>
   </entry>
+  <entry>
+    <title>【learn Git Branching】</title>
+    <url>/2021/02/15/learnGitBranching/</url>
+    <content><![CDATA[<p>Git作为程序员必备的技能，有些命令长时间不用就慢慢遗忘了比如<code>rebase -i</code>、<code>branch -f</code>，花了一个小时完了把游戏，强化这些命令…<a href="https://learngitbranching.js.org/?locale=zh_CN" target="_blank" rel="noopener">游戏入口传送门</a></p>
+<a id="more"></a>
+
+<p>我已经通关啦，哈哈哈哈…</p>
+<p><img src="/2021/02/15/learnGitBranching/image-20210215213758725.png" alt="image-20210215213758725"></p>
+<h3 id="玩游戏的过程中又重新回顾的知识点："><a href="#玩游戏的过程中又重新回顾的知识点：" class="headerlink" title="玩游戏的过程中又重新回顾的知识点："></a>玩游戏的过程中又重新回顾的知识点：</h3><p>1、reset和revert的区别：reset是向上移动分支，相当于本地代码的最后一次提交就被抹去了；而revert则是为了撤销上一次的修改，重新提了一笔代码，它是可以直接push到远程分支的；</p>
+<p>2、<code>git branch -f main C3</code> 将main分支强制指向某一次提交；</p>
+<p>3、<code>git rebase main</code> 找到当前分支与rebase的目的分支的共同节点，将共同节点以下到当前分支的HEAD所有的修改，拷贝到需要rebase的分支上；</p>
+]]></content>
+      <categories>
+        <category>git</category>
+      </categories>
+      <tags>
+        <tag>git学习</tag>
+      </tags>
+  </entry>
 </search>
