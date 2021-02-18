@@ -380,7 +380,8 @@
 <p>2、当子线程中的UI需要更新时，创建一个Message对象，并且通过Handler对象调用sendMessage方法，将这条消息发送出去；</p>
 <p>3、这条消息就被添加到MessageQueue队列中等待被处理，而Looper则会一直尝试从MessageQueue中取出待处理的消息，最后发回给Handler的handlerMessage方法中。</p>
 <p>4、由于Handler是在主线程中创建的，所以此时handleMessage方法中的代码也会在主线程中运行；</p>
-<h2 id="BroadcastReceiver"><a href="#BroadcastReceiver" class="headerlink" title="BroadcastReceiver"></a>BroadcastReceiver</h2><p>参考文档：</p>
+<h2 id="BroadcastReceiver"><a href="#BroadcastReceiver" class="headerlink" title="BroadcastReceiver"></a>BroadcastReceiver</h2><h3 id="遗留问题"><a href="#遗留问题" class="headerlink" title="遗留问题"></a>遗留问题</h3><p>1、app/build.gradle与项目下的build.gradle分别是什么文件？有什么作用？</p>
+<p>参考文档：</p>
 <ol>
 <li><p><a href="https://developer.android.google.cn/guide?hl=zh_cn" target="_blank" rel="noopener">Android Developers</a></p>
 </li>
@@ -423,6 +424,17 @@
 <h3 id="玩游戏的过程中又重新回顾的知识点："><a href="#玩游戏的过程中又重新回顾的知识点：" class="headerlink" title="玩游戏的过程中又重新回顾的知识点："></a>玩游戏的过程中又重新回顾的知识点：</h3><p>1、reset和revert的区别：reset是向上移动分支，相当于本地代码的最后一次提交就被抹去了；而revert则是为了撤销上一次的修改，重新提了一笔代码，它是可以直接push到远程分支的；</p>
 <p>2、<code>git branch -f main C3</code> 将main分支强制指向某一次提交；</p>
 <p>3、<code>git rebase main</code> 找到当前分支与rebase的目的分支的共同节点，将共同节点以下到当前分支的HEAD所有的修改，拷贝到需要rebase的分支上；</p>
+<p>4、<code>cherry-pick</code> 将指定的提交，更新到某个分支上；</p>
+<h3 id="项目开发过程中可能会遇到的与Git相关的问题"><a href="#项目开发过程中可能会遇到的与Git相关的问题" class="headerlink" title="项目开发过程中可能会遇到的与Git相关的问题"></a>项目开发过程中可能会遇到的与Git相关的问题</h3><p>1、 一个或者几个提交由于种种原因（gerrit超时过期、分支混乱等）无法正常提交合入，有没有一种最原始直接的办法将这一个或几个commit提交合入主干？</p>
+<p>最原始的办法当然就是另起一个mr，重新提交；可能之前的commit修改的文件很多，如果手动逐个文件进行更改，那就太离谱了；可以使用git format-patch命令打patch，然后再新的代码仓中应用这个patch即可：</p>
+<p><code>git format-patch &lt;r1&gt;...&lt;r2&gt;</code>两个commit及其之间的修改打成一个patch;</p>
+<p><code>git format-patch -1 &lt;r1&gt;</code> 单个commit打成一个patch;</p>
+<p><code>git format-patch &lt;r1&gt;</code> 从r1到最新代码的变更打成一个patch，不包含r1;</p>
+<p><code>git apply --stat 0001-minor-fix.patch</code> 检查patch文件；</p>
+<p><code>git apply --check 0001-minor-fix.patch</code> 查看能否应用成功；</p>
+<p><code>git am -s &lt; 0001-minor-fix.patch</code> 应用patch;</p>
+<p>// loading…</p>
+<h3 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h3><p>1、<a href="https://www.jianshu.com/p/814fb6606734" target="_blank" rel="noopener">Git生成patch和应用patch</a></p>
 ]]></content>
       <categories>
         <category>git</category>

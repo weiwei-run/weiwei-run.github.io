@@ -2,15 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>http://weiwei.run/2021/02/15/learnGitBranching/</loc>
+    <lastmod>2021-02-18</lastmod>
+  </url>
+  <url>
+    <loc>http://weiwei.run/2021/02/05/AndroidColumn/</loc>
     <lastmod>2021-02-15</lastmod>
   </url>
   <url>
     <loc>http://weiwei.run/2021/02/15/theCleanCoder/</loc>
     <lastmod>2021-02-15</lastmod>
-  </url>
-  <url>
-    <loc>http://weiwei.run/2021/02/05/AndroidColumn/</loc>
-    <lastmod>2021-02-13</lastmod>
   </url>
   <url>
     <loc>http://weiwei.run/2021/01/31/multi-agent-simulation/</loc>

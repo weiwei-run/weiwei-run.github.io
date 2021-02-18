@@ -144,7 +144,7 @@
 <meta property="og:image" content="http://weiwei.run/2021/02/05/AndroidColumn/image-20210214072805210.png">
 <meta property="og:image" content="http://weiwei.run/2021/02/05/AndroidColumn/IMG_D6D1AC18EFAE-1.png">
 <meta property="article:published_time" content="2021-02-04T22:22:49.000Z">
-<meta property="article:modified_time" content="2021-02-13T23:56:59.628Z">
+<meta property="article:modified_time" content="2021-02-15T22:41:00.079Z">
 <meta property="article:author" content="weiwei">
 <meta property="article:tag" content="Android专栏">
 <meta name="twitter:card" content="summary">
@@ -539,7 +539,8 @@
 <p>2、当子线程中的UI需要更新时，创建一个Message对象，并且通过Handler对象调用sendMessage方法，将这条消息发送出去；</p>
 <p>3、这条消息就被添加到MessageQueue队列中等待被处理，而Looper则会一直尝试从MessageQueue中取出待处理的消息，最后发回给Handler的handlerMessage方法中。</p>
 <p>4、由于Handler是在主线程中创建的，所以此时handleMessage方法中的代码也会在主线程中运行；</p>
-<h2 id="BroadcastReceiver"><a href="#BroadcastReceiver" class="headerlink" title="BroadcastReceiver"></a>BroadcastReceiver</h2><p>参考文档：</p>
+<h2 id="BroadcastReceiver"><a href="#BroadcastReceiver" class="headerlink" title="BroadcastReceiver"></a>BroadcastReceiver</h2><h3 id="遗留问题"><a href="#遗留问题" class="headerlink" title="遗留问题"></a>遗留问题</h3><p>1、app/build.gradle与项目下的build.gradle分别是什么文件？有什么作用？</p>
+<p>参考文档：</p>
 <ol>
 <li><p><a href="https://developer.android.google.cn/guide?hl=zh_cn" target="_blank" rel="noopener">Android Developers</a></p>
 </li>
@@ -743,7 +744,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#源起"><span class="nav-number">1.</span> <span class="nav-text">源起</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基础概念"><span class="nav-number">2.</span> <span class="nav-text">基础概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四大组件"><span class="nav-number">3.</span> <span class="nav-text">四大组件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Activity生命周期"><span class="nav-number">4.</span> <span class="nav-text">Activity生命周期</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ContentProvider"><span class="nav-number">5.</span> <span class="nav-text">ContentProvider</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Service"><span class="nav-number">6.</span> <span class="nav-text">Service</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Android多线程编程"><span class="nav-number">6.1.</span> <span class="nav-text">Android多线程编程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#异步消息处理机制详解"><span class="nav-number">6.2.</span> <span class="nav-text">异步消息处理机制详解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BroadcastReceiver"><span class="nav-number">7.</span> <span class="nav-text">BroadcastReceiver</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#源起"><span class="nav-number">1.</span> <span class="nav-text">源起</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基础概念"><span class="nav-number">2.</span> <span class="nav-text">基础概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四大组件"><span class="nav-number">3.</span> <span class="nav-text">四大组件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Activity生命周期"><span class="nav-number">4.</span> <span class="nav-text">Activity生命周期</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ContentProvider"><span class="nav-number">5.</span> <span class="nav-text">ContentProvider</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Service"><span class="nav-number">6.</span> <span class="nav-text">Service</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Android多线程编程"><span class="nav-number">6.1.</span> <span class="nav-text">Android多线程编程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#异步消息处理机制详解"><span class="nav-number">6.2.</span> <span class="nav-text">异步消息处理机制详解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BroadcastReceiver"><span class="nav-number">7.</span> <span class="nav-text">BroadcastReceiver</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#遗留问题"><span class="nav-number">7.1.</span> <span class="nav-text">遗留问题</span></a></li></ol></li></ol></div>
             
 
           </div>
