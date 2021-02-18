@@ -1,303 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>【Depix】马赛克图片处理</title>
-    <url>/2021/01/04/Mosaic/</url>
-    <content><![CDATA[<p>朋友在微信圈发了一张图，分享了2020年初立下的flag，不过有部分内容还打码了，可能是不想让人家看到她在想啥。记得早些时候关注过Depix项目，想着是不是可以用这个项目来解析朋友在圈里发的马赛克照片呢，于是看了一下…</p>
-<a id="more"></a>
-
-<p>本次分析的主角就是github 3天收割7K star的爆款项目Depix，Depix是用于解析打码后的图像，不过首先我们要了解一下马赛克的基本知识。</p>
-<blockquote>
-<p>马赛克指一种图像（视频）处理手段，此手段将影像特定区域的色阶细节劣化并造成色块打乱的效果，因为这种模糊看上去由一个个的小格子组成，便形象的称这种画面为马赛克。其目的通常是使之无法辨认。</p>
-</blockquote>
-<blockquote>
-<p>马赛克的作用就是为破坏其背后图像的细节！这是不可逆的，后期处理并不能真正恢复马赛克后面图像的原有细节！任何人或软件都不能去掉马赛克让图像真正恢复原来的效果！</p>
-</blockquote>
-<blockquote>
-<p>马赛克不能被还原，现在都是AI通过后台大量的素材库去猜原图可能会是什么样子，然后使用相同的方法去打码，再和打码后的图像进行比对，以此来达到目的；</p>
-</blockquote>
-<p><strong>结论：目前来说基本上没有任何一种完全有效的技术能去除马赛克，尤其是静态图片。</strong></p>
-<h3 id="动手试试"><a href="#动手试试" class="headerlink" title="动手试试"></a>动手试试</h3><p>1、从github上把Depix项目下载下来，按照如下命令跑一遍它给的demo</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">python depix.py -p images/testimages/testimage3_pixels.png -s images/searchimages/debruinseq_notepad_Windows10_closeAndSpaced.png -o output.png</span><br></pre></td></tr></table></figure>
-
-<p>结果发现还是不错的，对比出来的效果基本和docs中描述的一致，原理就是和预先设置好的德布鲁因序列（searchimages）进行匹配，如果一致则猜测原图的字母排列；当然我说的比较简单，中间还有很多细节，不过大体如此；</p>
-<p><img src="/2021/01/04/Mosaic/image-20210122084927955.png" alt="image-20210122084927955"></p>
-<p><img src="/2021/01/04/Mosaic/Recovering_prototype_latest.png" alt="Recovering_prototype_latest"></p>
-<p>好了，然后我拿到了朋友的微信圈分享图，开始尝试Depix是不是可以处理呢？（纯学术研究，图片已经进行了敏感信息处理）</p>
-<p><img src="/2021/01/04/Mosaic/image-20210122085358263.png" alt="image-20210122085358263"></p>
-<p>看到这张图你就感觉不太可能复原，或者猜出隐藏的内容；</p>
-<p>1、Depix就是能用，但是你没有中文的德布鲁因序列图，怎么查？</p>
-<p>2、马赛克的风格有明显不同，该图至少用了两种马赛克的打码，不同的马赛克生成格式一致么？</p>
-<p>3、原始编辑器是怎样的，如果不能生成和原图一样的背景图，无法使用Depix分析</p>
-<p>总之，Depix的原理是好的，值得学习，但是目前为止想要复原或者猜测出这张图的内容，恐怕是不太现实，在此悬赏，如果有人能成功复原我上面给出的这张图，10000￥红包呈上….</p>
-<p>参考：</p>
-<p>1.<a href="https://zhuanlan.zhihu.com/p/337593391" target="_blank" rel="noopener">AI看透你的小心思</a></p>
-<p>2.<a href="https://zhuanlan.zhihu.com/p/158047094" target="_blank" rel="noopener">马赛克到底能不能被消除</a></p>
-]]></content>
-      <categories>
-        <category>github项目</category>
-      </categories>
-      <tags>
-        <tag>马赛克处理</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>【每天学点算法系列】morris遍历</title>
-    <url>/2020/09/24/algorithm-leetcode501/</url>
-    <content><![CDATA[<p>二叉树的遍历通常O(n)的时间复杂度与O(logn)的空间复杂度，而<strong>morris</strong>遍历实现了O(n)的时间复杂度和O(1)的空间复杂度…</p>
-<a id="more"></a>
-
-<h3 id="morris遍历的原理"><a href="#morris遍历的原理" class="headerlink" title="morris遍历的原理"></a>morris遍历的原理</h3><blockquote>
-<p>对于没有左子树的节点只达到一次，对于有左子树的节点会到达两次；</p>
-</blockquote>
-<h3 id="morris遍历的实现原则"><a href="#morris遍历的实现原则" class="headerlink" title="morris遍历的实现原则"></a>morris遍历的实现原则</h3><p>记当前节点为cur</p>
-<ol>
-<li>如果cur无左子树，cur右移（cur = cur.right）;</li>
-<li>如果cur有左子树，找到cur左子树最右的节点，记做mostright；<ul>
-<li>如果mostright的right指针为空，则将其指向cur（mostright.right = cur），cur左移（cur = cur.left）;</li>
-<li>如果mostright的right指针指向cur，则将其置为空（mostright.right = null），cur右移（cur = cur.right）;</li>
-</ul>
-</li>
-</ol>
-<p>图示：</p>
-<p><img src="/2020/09/24/algorithm-leetcode501/show.gif" alt="show"></p>
-<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * public class TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     TreeNode left;</span></span><br><span class="line"><span class="comment"> *     TreeNode right;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x) &#123; val = x; &#125;</span></span><br><span class="line"><span class="comment"> * &#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;Integer&gt; <span class="title">inorderTraversal</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">        List&lt;Integer&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        <span class="keyword">if</span> (root == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> list;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//当前节点和前驱节点</span></span><br><span class="line">        TreeNode cur = root;</span><br><span class="line">        TreeNode pre = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//当cur不为null的时候</span></span><br><span class="line">        <span class="keyword">while</span> (cur != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="comment">//如果当前节点没有左儿子，就走右儿子</span></span><br><span class="line">            <span class="keyword">if</span> (cur.left == <span class="keyword">null</span>) &#123;</span><br><span class="line">                list.add(cur.val);</span><br><span class="line">                cur = cur.right;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="comment">//当前节点有左儿子，那么就要找到当前节点的前驱，就是从它的左儿子，然后一直往右走到底。且 不为当前cur节点</span></span><br><span class="line">                pre = cur.left;</span><br><span class="line">                <span class="keyword">while</span> (pre.right != <span class="keyword">null</span> &amp;&amp; pre.right != cur) &#123;</span><br><span class="line">                    pre = pre.right;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">// 如果前驱节点的右节点已经被设置，也就是我们设置过线索了，需要将它右孩子重新设置为空，输出当前节点。</span></span><br><span class="line">                <span class="comment">// cur更新为cur.right，因为因为我们走的是cur.left，如果设置过线索，就说明左边都访问过了，要看右边</span></span><br><span class="line">                <span class="keyword">if</span> (pre.right == cur) &#123;</span><br><span class="line">                    list.add(cur.val);</span><br><span class="line">                    pre.right = <span class="keyword">null</span>;</span><br><span class="line">                    cur = cur.right;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="comment">//如果是第一次访问该节点，也就是还没有设置线索，要设置线索，它的right即为当前节点，然后我们继续看cur.left，因为左边还没设置</span></span><br><span class="line">                    pre.right = cur;</span><br><span class="line">                    cur = cur.left;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> list;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="补充思考"><a href="#补充思考" class="headerlink" title="补充思考"></a>补充思考</h3><p>1、为什么morris遍历的空间复杂度为O(1)，而一遍的遍历为O(logN)呢？怎么计算的？</p>
-<p>一般二叉树的遍历：</p>
-<blockquote>
-<ol>
-<li><strong>先序遍历</strong>：按照 <code>父节点 -&gt; 左孩子 -&gt; 右孩子</code> 的顺序遍历，与DFS（深度优先搜索）有一定联系；</li>
-<li><strong>中序遍历</strong>：按照 <code>左孩子 -&gt; 父节点 -&gt; 右孩子</code> 的顺序遍历。当二叉树为二叉搜索树时，中序遍历返回结果为有序序列，因此也叫顺序遍历；</li>
-<li><strong>后序遍历</strong>：按照 <code>左孩子 -&gt; 右孩子 -&gt; 父节点</code> 的顺序遍历。</li>
-<li><strong>层次遍历</strong>：从左到右，一层一层遍历整个树，与BFS（广度优先搜索）有一定联系。</li>
-</ol>
-</blockquote>
-<p>比如我们用栈来完成一个二叉树的先序遍历，通常是这样：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">preOrderTraversal</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (root == <span class="keyword">null</span>) <span class="keyword">return</span>;</span><br><span class="line">	Stack&lt;TreeNode&gt; stack = <span class="keyword">new</span> Stack&lt;TreeNode&gt;(); <span class="comment">// 利用栈进行临时存储</span></span><br><span class="line">	stack.push(root);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span> (!stack.isEmpty()) &#123;</span><br><span class="line">		TreeNode node = stack.pop(); <span class="comment">// 取出一个节点，表示开始访问以该节点为根的子树</span></span><br><span class="line">		visit(node); <span class="comment">// 首先访问该节点（先序），之后顺序入栈右子树、左子树</span></span><br><span class="line">		<span class="keyword">if</span> (node.right != <span class="keyword">null</span>) stack.push(node.right);</span><br><span class="line">		<span class="keyword">if</span> (node.left != <span class="keyword">null</span>) stack.push(node.left);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>如果二叉树的结构如图所示，那么栈的大小只要能容纳两个节点就够了，所以这种方法的空间复杂度与二叉树的深度有关，最好和平均为O(logN)，最坏为O(N);</p>
-<p><img src="/2020/09/24/algorithm-leetcode501/erchashu.png" alt="erchashu"></p>
-<p>而Morris遍历却不一样，它通过对子节点引用的更改来实现后续节点的保存，所以仅仅通过O(1)的空间复杂度实现了二叉树的遍历（大神就是不一样…）</p>
-<h3 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h3><p>1、<a href="https://leetcode-cn.com/problems/binary-tree-inorder-traversal/solution/xue-xi-yi-xia-morrissuan-fa-by-jerry_nju-2/" target="_blank" rel="noopener">力扣501题解</a></p>
-<p>2、<a href="https://ghh3809.github.io/2018/08/06/morris-traversal/" target="_blank" rel="noopener">经典算法小评</a></p>
-]]></content>
-      <categories>
-        <category>算法</category>
-      </categories>
-      <tags>
-        <tag>morris算法</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>【Hello World】</title>
-    <url>/2020/07/21/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<a id="more"></a>
-
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-]]></content>
-  </entry>
-  <entry>
-    <title>【每天学点算法系列】链表与环的探究</title>
-    <url>/2020/10/26/listAndCircle/</url>
-    <content><![CDATA[<p>最近看了一点 Floyd cycle detection（弗洛伊德判圈算法），觉得有点意思，特此整理了一下…</p>
-<a id="more"></a>
-
-<p><strong>关于一个链表与环可能会遇到的问题</strong>：</p>
-<blockquote>
-<ol>
-<li>判断一个链表是否有环？</li>
-<li>找出环的起始位置；</li>
-<li>找出环的大小；</li>
-<li>求链表的长度：起始位置+环的大小</li>
-<li>如果存在环，求出环上任意一个节点最远的点</li>
-<li>如何判断两个无环链表是否相交</li>
-<li>如果相交，求出第一个相交的点；</li>
-</ol>
-</blockquote>
-<h3 id="判断一个链表是否有环"><a href="#判断一个链表是否有环" class="headerlink" title="判断一个链表是否有环"></a>判断一个链表是否有环</h3><p>快慢指针算法</p>
-<p>// loading…</p>
-]]></content>
-      <categories>
-        <category>算法</category>
-      </categories>
-      <tags>
-        <tag>链表</tag>
-        <tag>环</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>【RPM Packaging Guide】</title>
-    <url>/2020/08/31/RPMPackagingGuide/</url>
-    <content><![CDATA[<p>翻译《RPM Packaging Guide》顺便学习一下~</p>
-<a id="more"></a>
-
-<h1 id="绪论"><a href="#绪论" class="headerlink" title="绪论"></a>绪论</h1><p>RPM 打包指导文档：</p>
-<p><strong>准备打包需要的源代码</strong></p>
-<p>这部分为没有软件开发背景的人所写，详见：<a href>准备打包需要的软件</a></p>
-<p><strong>如何将源码打包成rpm包</strong></p>
-<p>这部分介绍将源码打包成rpm包，详见：<a href>打包软件</a></p>
-<p><strong>高级打包技巧</strong></p>
-<p>这部分提供给需要在复杂场景打包的人员作为参考材料，详见：<a href>高级用法</a></p>
-<h2 id="PDF-版本"><a href="#PDF-版本" class="headerlink" title="PDF 版本"></a>PDF 版本</h2><p>你可以在<a href="https://rpm-packaging-guide.github.io/rpm-packaging-guide.pdf" target="_blank" rel="noopener">这里</a>下载文档PDF版本 </p>
-<h2 id="文档规范"><a href="#文档规范" class="headerlink" title="文档规范"></a>文档规范</h2><p>本文使用如下规范：</p>
-<ul>
-<li><p>命令输入以及文本文件的内容，包括源代码以块的方式排列：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ tree ~&#x2F;rpmbuild&#x2F;</span><br><span class="line">&#x2F;home&#x2F;user&#x2F;rpmbuild&#x2F;</span><br><span class="line">|-- BUILD</span><br><span class="line">|-- RPMS</span><br><span class="line"></span><br><span class="line">[command output trimmed]</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Name:           bello</span><br><span class="line">Version:</span><br><span class="line">Release:        1%&#123;?dist&#125;</span><br><span class="line">Summary:</span><br><span class="line"></span><br><span class="line">[file contents trimmed]</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"></span><br><span class="line">print(<span class="string">"Hello World"</span>)</span><br></pre></td></tr></table></figure>
-
-
-
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>著作翻译</category>
-      </categories>
-      <tags>
-        <tag>rpm打包</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>【每天学点算法系列】单调栈</title>
-    <url>/2020/10/28/MonotonousStack/</url>
-    <content><![CDATA[<p>一串神秘代码“53124”开启了单调栈的进阶…</p>
-<a id="more"></a>
-
-<p><img src="/2020/10/28/MonotonousStack/MonotonousStack1.png" alt="erchashu"></p>
-]]></content>
-      <categories>
-        <category>算法</category>
-      </categories>
-      <tags>
-        <tag>单调栈</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>【multi-agent-simulation】社会力模型演示</title>
-    <url>/2021/01/31/multi-agent-simulation/</url>
-    <content><![CDATA[<p>近日有幸接触到robot跟随方面的研究，而跟随方向的论文大都提到了Social force model【社会力模型】，这个概念最早可追溯到Dirk Helbing在1995年的论文[Social force model for pedestrian dynamics]….</p>
-<a id="more"></a>
-
-<h3 id="论文"><a href="#论文" class="headerlink" title="论文"></a>论文</h3><p><img src="/2021/01/31/multi-agent-simulation/IMG_0010.jpg" alt="IMG_0010"></p>
-<p>大致就是我上面描述的这个意思，核心思想就是把微观世界中的相互作用力引入到宏观世界，比如人类社会；一个人如果想要跟随另一个人应该怎么运动才能避免碰撞到周围的人，同时又能很好地跟随目标，社会力模型提供了一个思路。</p>
-<p>注：社会力模型在不同的论文中有很多变化，考虑的维度也不一样如果你认为我说的不对，那么以你的为准；</p>
-<h3 id="github项目"><a href="#github项目" class="headerlink" title="github项目"></a>github项目</h3><p><a href="https://github.com/my-HenryS/multi-agent-simulation" target="_blank" rel="noopener">multi-agent-simulation</a>是github上一个开源项目，时间比较久了博主后面基本没怎么维护，不过拿来跑跑，看一下效果还是可以的；配置好maven，JDK，直接导入，运行SimulationPanelMain；</p>
-<p>项目具体描述参考readme文件</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">欲开始运行仿真请打开app包，并运行其中的一个Main程序。Gui内的SimulationPanelMain是可视化的仿真界面，主要用于演示；Console内的TextOutputMain是可以将运行结果以字符串形式输出的Main程序，主要用于输出具体的数据以便实验使用。</span><br><span class="line"></span><br><span class="line">项目分为5个package，分别为app、container、drawer、geom、model</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2021/01/31/multi-agent-simulation/ScreenShot2021-02-04at06.54.16.png" alt="Screen Shot 2021-02-04 at 06.54.16"></p>
-<p>运行成功之后会出现如下所示，选择Simulation Mode，然后可以选择模拟的场景，比如：ApplicationForSubway</p>
-<p><img src="/2021/01/31/multi-agent-simulation/image-20210204065949988.png" alt="image-20210204065949988"></p>
-<p>目前只看到了subway和Cross Flow场景是可以正常run起来的，其他的场景估计要加载配置，不过效果就是这样；相关的算法，节点数量，障碍物设置都是可以自己调整的，对于整个社会力模型的认识是有帮助的；如果做跟随路径规划，也可以在模型中先跑一跑看一下效果；</p>
-<p><img src="/2021/01/31/multi-agent-simulation/2021-02-0407.05.50.gif" alt="2021-02-04 07.05.50"></p>
-<p>好了本次的github项目分享就到这里，后面看到有趣的好玩的github项目，会继续发出来让更多的人知道…</p>
-]]></content>
-      <categories>
-        <category>github项目</category>
-      </categories>
-      <tags>
-        <tag>社会力模型</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>【2020科学上网日记】</title>
-    <url>/2020/12/09/scienceOnline2020/</url>
-    <content><![CDATA[<p>那一天，人类回想起了，曾经被那堵墙支配的恐惧，以及被囚禁在鸟笼中的屈辱…</p>
-<p>—-节选自《2020科学上网日记》</p>
-<a id="more"></a>
-
-<p>很久很久以前，那个时候是可以直接访问Google、Facebook、Twitter、Instagram等国外网站的。</p>
-<p><img src="/2020/12/09/scienceOnline2020/ScreenShot2020-12-09at21.41.58.png" alt="ScreenShot2020-12-09at21.41.58"></p>
-<p>突然有一天，一堵名为GFW（Great Firewall）的大墙挡在了中间，从此生活便少了诸多色彩。</p>
-<p><img src="/2020/12/09/scienceOnline2020/ScreenShot2020-12-09at21.50.13.png" alt="Screen Shot 2020-12-09 at 21.50.13"></p>
-<p>终于有一天，一个叫SSH Server的东西出现了，它改变了我的世界。它生来就与众不同，我们访问它可以不经过GFW，而他可以访问外面的世界不受GFW的影响。如此我们之后就可以请他代替我们访问一些被GFW墙掉的网站，然后再将内容发给我们。</p>
-<p><img src="/2020/12/09/scienceOnline2020/ScreenShot2020-12-09at21.51.20.png" alt="Screen Shot 2020-12-09 at 21.51.20"></p>
-<p>但是，GFW不甘心这种东西的存在，而ssh本身的特征是明显的，GFW便可以分析连接特征去搞搞小破坏，干扰我们的开心生活。于是ss便出现了。</p>
-<p><img src="/2020/12/09/scienceOnline2020/ScreenShot2020-12-09at21.51.59.png" alt="Screen Shot 2020-12-09 at 21.51.59"></p>
-<h3 id="安装配置"><a href="#安装配置" class="headerlink" title="安装配置"></a>安装配置</h3><p>环境工具：Vultr + v2ray</p>
-<h4 id="一、首先买一台墙外的服务器，作为SS-Server，推荐选择Vultr。"><a href="#一、首先买一台墙外的服务器，作为SS-Server，推荐选择Vultr。" class="headerlink" title="一、首先买一台墙外的服务器，作为SS Server，推荐选择Vultr。"></a>一、首先买一台墙外的服务器，作为SS Server，推荐选择Vultr。</h4><blockquote>
-<p>有很多国外服务商，像aws、google、vultr、搬瓦工，等等。aws可以免费一年，google也类似，但是国外的网站可能不符合咱的操作习惯，很多用起来很麻烦，对小白太累，而且aws每个月只免费1G流量，他们还需要信用卡绑定，有些学生又没有信用卡。所以我们可能会选择搬瓦工或者vultr这种操作简单，支持支付宝支付的商家。就我来说，我喜欢vultr，按小时计费，可以随时删除服务器，应对ip被封的情况，而且价格相对便宜，网站简洁，操作简单，支持支付宝微信支付。搬瓦工相对vultr要便宜一点，但是一般是月付或者年付，万一被封ip，可能就亏了，但是对于买来还有其他用途的人来说，搬瓦工也是个不错的选择哦</p>
-</blockquote>
-<p>访问<a href="https://www.vultr.com/" target="_blank" rel="noopener">Vultr官网</a>注册账号，验证邮箱</p>
-<p><img src="/2020/12/09/scienceOnline2020/ScreenShot2020-12-09at21.57.27.png" alt="Screen Shot 2020-12-09 at 21.57.27"></p>
-<p>账户没钱记得存点钱，可以使用支付宝</p>
-<p><img src="/2020/12/09/scienceOnline2020/ScreenShot2020-12-09at22.02.38.png" alt="Screen Shot 2020-12-09 at 22.02.38"></p>
-<p>选择Products，购买一台服务器，推荐（Tokyo - Ubuntu 18.04 X64 - $5/mo）</p>
-<p><img src="/2020/12/09/scienceOnline2020/ScreenShot2020-12-09at21.59.46.png" alt="Screen Shot 2020-12-09 at 21.59.46"></p>
-<p>Deploy Now完成后就可以看到创建的实例了，比如我的</p>
-<p><img src="/2020/12/09/scienceOnline2020/ScreenShot2020-12-09at22.05.17.png" alt="Screen Shot 2020-12-09 at 22.05.17"></p>
-<p>MAC 可以使用ShellCraft连接服务器，Host是你的服务器IP，端口22不变，User name是root，Password 服务器详情中查看。</p>
-<p><img src="/2020/12/09/scienceOnline2020/ScreenShot2020-12-09at22.08.07.png" alt="Screen Shot 2020-12-09 at 22.08.07"></p>
-<p><img src="/2020/12/09/scienceOnline2020/ScreenShot2020-12-09at22.09.36.png" alt="Screen Shot 2020-12-09 at 22.09.36"></p>
-<p>连接成功之后如下：</p>
-<p><img src="/2020/12/09/scienceOnline2020/ScreenShot2020-12-09at22.11.25.png" alt="Screen Shot 2020-12-09 at 22.11.25"></p>
-<h4 id="二、配置SS-Server"><a href="#二、配置SS-Server" class="headerlink" title="二、配置SS Server"></a>二、配置SS Server</h4><p>服务器买了当然要配置一下，不然怎么在墙外接收你的request呢，推荐使用V2ray因为更稳定，一键安装：</p>
-<p>将以下命令复制到你已连接的服务器命令行中，然后就是一步一步下一步</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">bash &lt;(curl -s -L https://git.io/v2ray.sh)</span><br></pre></td></tr></table></figure>
-
-<p>选择1，按回车</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"> 1. 安装</span><br><span class="line"> 2. 卸载</span><br><span class="line">请选择 [1-2]:1</span><br></pre></td></tr></table></figure>
-
-<p>用默认的tcp就行，直接回车</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">请选择 V2Ray 传输协议 [1-32]</span><br><span class="line">  1. TCP</span><br><span class="line">  2. TCP_HTTP</span><br><span class="line">  3. WebSocket</span><br><span class="line">  4. WebSocket + TLS</span><br><span class="line">  5. HTTP&#x2F;2</span><br><span class="line">  6. mKCP</span><br><span class="line">  7. mKCP_utp</span><br><span class="line">  8. mKCP_srtp</span><br><span class="line">  9. mKCP_wechat-video</span><br><span class="line"> 10. mKCP_dtls</span><br><span class="line"> 11. mKCP_wireguard</span><br><span class="line"> 12. QUIC</span><br><span class="line"> 13. QUIC_utp</span><br><span class="line"> 14. QUIC_srtp</span><br><span class="line"> 15. QUIC_wechat-video</span><br><span class="line"> 16. QUIC_dtls</span><br><span class="line"> 17. QUIC_wireguard</span><br><span class="line"> 18. TCP_dynamicPort</span><br><span class="line"> 19. TCP_HTTP_dynamicPort</span><br><span class="line"> 20. WebSocket_dynamicPort</span><br><span class="line"> 21. mKCP_dynamicPort</span><br><span class="line"> 22. mKCP_utp_dynamicPort</span><br><span class="line"> 23. mKCP_srtp_dynamicPort</span><br><span class="line"> 24. mKCP_wechat-video_dynamicPort</span><br><span class="line"> 25. mKCP_dtls_dynamicPort</span><br><span class="line"> 26. mKCP_wireguard_dynamicPort</span><br><span class="line"> 27. QUIC_dynamicPort</span><br><span class="line"> 28. QUIC_utp_dynamicPort</span><br><span class="line"> 29. QUIC_srtp_dynamicPort</span><br><span class="line"> 30. QUIC_wechat-video_dynamicPort</span><br><span class="line"> 31. QUIC_dtls_dynamicPort</span><br><span class="line"> 32. QUIC_wireguard_dynamicPort</span><br><span class="line">备注1: 含有 [dynamicPort] 的即启用动态端口..</span><br><span class="line">备注2: [utp | srtp | wechat-video | dtls | wireguard] 分别伪装成 [BT下载 | 视频通话 | 微信视频通话 | DTLS 1.2 数据包 | WireGuard 数据包]</span><br><span class="line">(默认协议: TCP):</span><br></pre></td></tr></table></figure>
-
-<p>端口随便写一个，范围1025到65535，也可以选择默认，直接回车</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">请输入 V2Ray 端口 [1-65535]</span><br><span class="line">(默认端口: 22681):</span><br></pre></td></tr></table></figure>
-
-<p>这个也不知道真影响假影响，姑且相信他，使用默认，直接回车</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">是否开启广告拦截(会影响性能) [Y&#x2F;N]</span><br><span class="line">(默认 [N]):</span><br></pre></td></tr></table></figure>
-
-<p>是不是顺便把ss服务也装了，这个就随便你了，我感觉用了v2ray也没必要再搭ss，毕竟s’s很容易被封，所以保持默认，回车</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">是否配置 Shadowsocks [Y&#x2F;N]</span><br><span class="line">(默认 [N]):</span><br></pre></td></tr></table></figure>
-
-<p>会让你确认一下信息，确认无误，按回车</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">---------- 安装信息 -------------</span><br><span class="line"> V2Ray 传输协议 &#x3D; TCP</span><br><span class="line"> V2Ray 端口 &#x3D; 22681</span><br><span class="line"> 是否配置 Shadowsocks &#x3D; 未配置</span><br><span class="line">---------- END -------------</span><br><span class="line">按 Enter 回车键 继续....或按 Ctrl + C 取消.</span><br></pre></td></tr></table></figure>
-
-<p>然后，就是等…</p>
-<p>安装完成，最后会提示你连接配置信息：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">---------- V2Ray 配置信息 -------------</span><br><span class="line"> 地址 (Address) &#x3D; 152.89.208.146</span><br><span class="line"> 端口 (Port) &#x3D; 47283</span><br><span class="line"> 用户ID (User ID &#x2F; UUID) &#x3D; ed0b4117-0f5a-41e9-a732-96bdaf343d23</span><br><span class="line"> 额外ID (Alter Id) &#x3D; 233</span><br><span class="line"> 传输协议 (Network) &#x3D; tcp</span><br><span class="line"> 伪装类型 (header type) &#x3D; none</span><br><span class="line">---------- END -------------</span><br></pre></td></tr></table></figure>
-
-<p>也可以通过命令<code>v2ray url</code> 和 <code>v2ray qr</code> 获取v2ray url和v2ray QRCode</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">root@ONEVPS190911085532:~# v2ray url</span><br><span class="line">---------- V2Ray vmess URL &#x2F; V2RayNG v0.4.1+ &#x2F; V2RayN v2.1+ &#x2F; 仅适合部分客户端 -------------</span><br><span class="line">vmess:&#x2F;&#x2F;ewoidiI6ICIyIiwKInBzIjogIjIzM3YyLmNvbV8xNTIuODkuMjA4LjE0NiIsCiJhZGQiOiAiMTUyLjg5LjIwOC4xNDYiLAoicG9ydCI6ICI0NzI4MyIsCiJpZCI6ICJlZDBiNDExNy0wZjVhLTQxZTktYTczMi05NmJkYWYzNDNkMjMiLAoiYWlkIjogIjIzMyIsCiJuZXQiOiAidGNwIiwKInR5cGUiOiAibm9uZSIsCiJob3N0IjogIiIsCiJwYXRoIjogIiIsCiJ0bHMiOiAiIgp9Cg&#x3D;&#x3D;</span><br><span class="line">root@ONEVPS190911085532:~# v2ray qr</span><br><span class="line">---------- V2Ray 二维码链接 适用于 V2RayNG v0.4.1+ &#x2F; Kitsunebi -------------</span><br><span class="line">https:&#x2F;&#x2F;233boy.github.io&#x2F;tools&#x2F;qr.html#vmess:&#x2F;&#x2F;ewoidiI6ICIyIiwKInBzIjogIjIzM3YyLmNvbV8xNTIuODkuMjA4LjE0NiIsCiJhZGQiOiAiMTUyLjg5LjIwOC4xNDYiLAoicG9ydCI6ICI0NzI4MyIsCiJpZCI6ICJlZDBiNDExNy0wZjVhLTQxZTktYTczMi05NmJkYWYzNDNkMjMiLAoiYWlkIjogIjIzMyIsCiJuZXQiOiAidGNwIiwKInR5cGUiOiAibm9uZSIsCiJob3N0IjogIiIsCiJwYXRoIjogIiIsCiJ0bHMiOiAiIgp9Cg&#x3D;&#x3D;</span><br><span class="line"> 友情提醒: 请务必核对扫码结果 (V2RayNG 除外)</span><br></pre></td></tr></table></figure>
-
-<h4 id="三、配置客户端"><a href="#三、配置客户端" class="headerlink" title="三、配置客户端"></a>三、配置客户端</h4><p>既然SS Server 配置好了，那就搞SS Local了，如果你用mac OS就下个V2RayX，如果你用Android手机就下个v2rayNG</p>
-<p><a href="https://tlanyan.me/v2ray-clients-download/" target="_blank" rel="noopener">V2Ray客户端下载地址</a></p>
-<p>比如MAC：打开客户端，选择Config，配置上一步生成的Address、Port、User ID、Alter Id即可，也可以通过导入url来自动配置；</p>
-<p><img src="/2020/12/09/scienceOnline2020/ScreenShot2020-12-09at22.22.14.png" alt="Screen Shot 2020-12-09 at 22.22.14"></p>
-<p><img src="/2020/12/09/scienceOnline2020/ScreenShot2020-12-09at22.23.07.png" alt="Screen Shot 2020-12-09 at 22.23.07"></p>
-<p>配置完成后，选择PAC Mode, 然后点击load core就是开启了服务；</p>
-<p><img src="/2020/12/09/scienceOnline2020/ScreenShot2020-12-09at22.27.02.png" alt="Screen Shot 2020-12-09 at 22.27.02"></p>
-<p>然后就可以打开谷歌浏览器看下youtube是不是可以正常访问啦， da’gong’gao’cheng</p>
-<p><img src="/2020/12/09/scienceOnline2020/ScreenShot2020-12-09at22.28.54.png" alt="Screen Shot 2020-12-09 at 22.28.54"></p>
-<p>安卓手机或者其他设备同理，只需要安装V2Ray客户端，配置好即可，记得给服务器续费…</p>
-<h5 id="参考文档："><a href="#参考文档：" class="headerlink" title="参考文档："></a>参考文档：</h5><p>1、<a href="https://viencoding.com/article/114" target="_blank" rel="noopener">Vultr注册并购买服务器搭VPN</a></p>
-<p>2、<a href="https://viencoding.com/article/207" target="_blank" rel="noopener">如何搭建v2ray，放弃使用ss和ssr</a></p>
-<p>3、<a href="https://viencoding.com/article/155" target="_blank" rel="noopener">搭梯子</a></p>
-]]></content>
-      <categories>
-        <category>环境配置</category>
-      </categories>
-      <tags>
-        <tag>科学上网</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>【Android专栏】</title>
     <url>/2021/02/05/AndroidColumn/</url>
     <content><![CDATA[<p>最近在做Iot开发免不了接触到一些Android的技术，所以出个专栏记录一下…</p>
@@ -397,21 +100,163 @@
       </tags>
   </entry>
   <entry>
-    <title>【The Clean Coder】</title>
-    <url>/2021/02/15/theCleanCoder/</url>
-    <content><![CDATA[<p>花了大概2个小时，读完了Bob大叔的这本《代码整洁之道——程序员的职业素养》有种斜躺在沙发上整日阅读叔本华的感觉….</p>
+    <title>【每天学点算法系列】单调栈</title>
+    <url>/2020/10/28/MonotonousStack/</url>
+    <content><![CDATA[<p>一串神秘代码“53124”开启了单调栈的进阶…</p>
 <a id="more"></a>
 
-<p>书中很多细节的表述直抵内心，比如妻子怀胎两月时自己被公司开除的羞愧；两周垒完一个应用+后台+存储时的狼狈；自己幼年参照手册完成逻辑门的欢呼雀跃～这些情节总是能对照自身找到共鸣。大学时为了加入acm班绞尽脑汁第一个写出找素数程序，还被同学夸奖说学得快；面试时作为物联网专业毕业生不知道iot的尴尬以及说不出什么是软件工程的羞愧；工作中技术分享会由于太紧张还有准备不充分被大佬怼得哑口无言… </p>
-<p>大学教育其实不能为我们带来职业素养，程序员真正重要的东西往往都是在职业发展中，在工作中，在一个个狼狈不堪的项目中学到的。这本书就像是为你讲述Bob大叔，这么一位人们公认的大神他的成长之路，你会觉得也不过如此，没有什么捷径，都是在辛勤的劳累和思考中获得的，我们也能做到。</p>
-<p>书中关于职业素养讲了很多，印象较深的有拒绝。懂得拒绝是职业素养很重要的一点。有时候迫于领导的权威，我们可能会答应，最后交付一堆烂代码，这是极其不负责任的。还有一个人的精力是有限的，如何做好时间管理，不要为了细枝末节浪费了你有限的魔力点数。关于日常要做卡塔练习，因为两个对手干架的时候，最先启动的是肌肉记忆，上层大脑的策略逻辑永远是慢一拍的。还有和团队的协作，工具的使用等等，强烈建议每个有志成为专业程序员的人都能通读一遍，从中受益。</p>
+<p><img src="/2020/10/28/MonotonousStack/MonotonousStack1.png" alt="erchashu"></p>
 ]]></content>
       <categories>
-        <category>读书笔记</category>
+        <category>算法</category>
       </categories>
       <tags>
-        <tag>代码整洁之道</tag>
+        <tag>单调栈</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>【Depix】马赛克图片处理</title>
+    <url>/2021/01/04/Mosaic/</url>
+    <content><![CDATA[<p>朋友在微信圈发了一张图，分享了2020年初立下的flag，不过有部分内容还打码了，可能是不想让人家看到她在想啥。记得早些时候关注过Depix项目，想着是不是可以用这个项目来解析朋友在圈里发的马赛克照片呢，于是看了一下…</p>
+<a id="more"></a>
+
+<p>本次分析的主角就是github 3天收割7K star的爆款项目Depix，Depix是用于解析打码后的图像，不过首先我们要了解一下马赛克的基本知识。</p>
+<blockquote>
+<p>马赛克指一种图像（视频）处理手段，此手段将影像特定区域的色阶细节劣化并造成色块打乱的效果，因为这种模糊看上去由一个个的小格子组成，便形象的称这种画面为马赛克。其目的通常是使之无法辨认。</p>
+</blockquote>
+<blockquote>
+<p>马赛克的作用就是为破坏其背后图像的细节！这是不可逆的，后期处理并不能真正恢复马赛克后面图像的原有细节！任何人或软件都不能去掉马赛克让图像真正恢复原来的效果！</p>
+</blockquote>
+<blockquote>
+<p>马赛克不能被还原，现在都是AI通过后台大量的素材库去猜原图可能会是什么样子，然后使用相同的方法去打码，再和打码后的图像进行比对，以此来达到目的；</p>
+</blockquote>
+<p><strong>结论：目前来说基本上没有任何一种完全有效的技术能去除马赛克，尤其是静态图片。</strong></p>
+<h3 id="动手试试"><a href="#动手试试" class="headerlink" title="动手试试"></a>动手试试</h3><p>1、从github上把Depix项目下载下来，按照如下命令跑一遍它给的demo</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">python depix.py -p images/testimages/testimage3_pixels.png -s images/searchimages/debruinseq_notepad_Windows10_closeAndSpaced.png -o output.png</span><br></pre></td></tr></table></figure>
+
+<p>结果发现还是不错的，对比出来的效果基本和docs中描述的一致，原理就是和预先设置好的德布鲁因序列（searchimages）进行匹配，如果一致则猜测原图的字母排列；当然我说的比较简单，中间还有很多细节，不过大体如此；</p>
+<p><img src="/2021/01/04/Mosaic/image-20210122084927955.png" alt="image-20210122084927955"></p>
+<p><img src="/2021/01/04/Mosaic/Recovering_prototype_latest.png" alt="Recovering_prototype_latest"></p>
+<p>好了，然后我拿到了朋友的微信圈分享图，开始尝试Depix是不是可以处理呢？（纯学术研究，图片已经进行了敏感信息处理）</p>
+<p><img src="/2021/01/04/Mosaic/image-20210122085358263.png" alt="image-20210122085358263"></p>
+<p>看到这张图你就感觉不太可能复原，或者猜出隐藏的内容；</p>
+<p>1、Depix就是能用，但是你没有中文的德布鲁因序列图，怎么查？</p>
+<p>2、马赛克的风格有明显不同，该图至少用了两种马赛克的打码，不同的马赛克生成格式一致么？</p>
+<p>3、原始编辑器是怎样的，如果不能生成和原图一样的背景图，无法使用Depix分析</p>
+<p>总之，Depix的原理是好的，值得学习，但是目前为止想要复原或者猜测出这张图的内容，恐怕是不太现实，在此悬赏，如果有人能成功复原我上面给出的这张图，10000￥红包呈上….</p>
+<p>参考：</p>
+<p>1.<a href="https://zhuanlan.zhihu.com/p/337593391" target="_blank" rel="noopener">AI看透你的小心思</a></p>
+<p>2.<a href="https://zhuanlan.zhihu.com/p/158047094" target="_blank" rel="noopener">马赛克到底能不能被消除</a></p>
+]]></content>
+      <categories>
+        <category>github项目</category>
+      </categories>
+      <tags>
+        <tag>马赛克处理</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【每天学点算法系列】morris遍历</title>
+    <url>/2020/09/24/algorithm-leetcode501/</url>
+    <content><![CDATA[<p>二叉树的遍历通常O(n)的时间复杂度与O(logn)的空间复杂度，而<strong>morris</strong>遍历实现了O(n)的时间复杂度和O(1)的空间复杂度…</p>
+<a id="more"></a>
+
+<h3 id="morris遍历的原理"><a href="#morris遍历的原理" class="headerlink" title="morris遍历的原理"></a>morris遍历的原理</h3><blockquote>
+<p>对于没有左子树的节点只达到一次，对于有左子树的节点会到达两次；</p>
+</blockquote>
+<h3 id="morris遍历的实现原则"><a href="#morris遍历的实现原则" class="headerlink" title="morris遍历的实现原则"></a>morris遍历的实现原则</h3><p>记当前节点为cur</p>
+<ol>
+<li>如果cur无左子树，cur右移（cur = cur.right）;</li>
+<li>如果cur有左子树，找到cur左子树最右的节点，记做mostright；<ul>
+<li>如果mostright的right指针为空，则将其指向cur（mostright.right = cur），cur左移（cur = cur.left）;</li>
+<li>如果mostright的right指针指向cur，则将其置为空（mostright.right = null），cur右移（cur = cur.right）;</li>
+</ul>
+</li>
+</ol>
+<p>图示：</p>
+<p><img src="/2020/09/24/algorithm-leetcode501/show.gif" alt="show"></p>
+<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * public class TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     TreeNode left;</span></span><br><span class="line"><span class="comment"> *     TreeNode right;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x) &#123; val = x; &#125;</span></span><br><span class="line"><span class="comment"> * &#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;Integer&gt; <span class="title">inorderTraversal</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">        List&lt;Integer&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        <span class="keyword">if</span> (root == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> list;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//当前节点和前驱节点</span></span><br><span class="line">        TreeNode cur = root;</span><br><span class="line">        TreeNode pre = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//当cur不为null的时候</span></span><br><span class="line">        <span class="keyword">while</span> (cur != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="comment">//如果当前节点没有左儿子，就走右儿子</span></span><br><span class="line">            <span class="keyword">if</span> (cur.left == <span class="keyword">null</span>) &#123;</span><br><span class="line">                list.add(cur.val);</span><br><span class="line">                cur = cur.right;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="comment">//当前节点有左儿子，那么就要找到当前节点的前驱，就是从它的左儿子，然后一直往右走到底。且 不为当前cur节点</span></span><br><span class="line">                pre = cur.left;</span><br><span class="line">                <span class="keyword">while</span> (pre.right != <span class="keyword">null</span> &amp;&amp; pre.right != cur) &#123;</span><br><span class="line">                    pre = pre.right;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">// 如果前驱节点的右节点已经被设置，也就是我们设置过线索了，需要将它右孩子重新设置为空，输出当前节点。</span></span><br><span class="line">                <span class="comment">// cur更新为cur.right，因为因为我们走的是cur.left，如果设置过线索，就说明左边都访问过了，要看右边</span></span><br><span class="line">                <span class="keyword">if</span> (pre.right == cur) &#123;</span><br><span class="line">                    list.add(cur.val);</span><br><span class="line">                    pre.right = <span class="keyword">null</span>;</span><br><span class="line">                    cur = cur.right;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="comment">//如果是第一次访问该节点，也就是还没有设置线索，要设置线索，它的right即为当前节点，然后我们继续看cur.left，因为左边还没设置</span></span><br><span class="line">                    pre.right = cur;</span><br><span class="line">                    cur = cur.left;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> list;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="补充思考"><a href="#补充思考" class="headerlink" title="补充思考"></a>补充思考</h3><p>1、为什么morris遍历的空间复杂度为O(1)，而一遍的遍历为O(logN)呢？怎么计算的？</p>
+<p>一般二叉树的遍历：</p>
+<blockquote>
+<ol>
+<li><strong>先序遍历</strong>：按照 <code>父节点 -&gt; 左孩子 -&gt; 右孩子</code> 的顺序遍历，与DFS（深度优先搜索）有一定联系；</li>
+<li><strong>中序遍历</strong>：按照 <code>左孩子 -&gt; 父节点 -&gt; 右孩子</code> 的顺序遍历。当二叉树为二叉搜索树时，中序遍历返回结果为有序序列，因此也叫顺序遍历；</li>
+<li><strong>后序遍历</strong>：按照 <code>左孩子 -&gt; 右孩子 -&gt; 父节点</code> 的顺序遍历。</li>
+<li><strong>层次遍历</strong>：从左到右，一层一层遍历整个树，与BFS（广度优先搜索）有一定联系。</li>
+</ol>
+</blockquote>
+<p>比如我们用栈来完成一个二叉树的先序遍历，通常是这样：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">preOrderTraversal</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (root == <span class="keyword">null</span>) <span class="keyword">return</span>;</span><br><span class="line">	Stack&lt;TreeNode&gt; stack = <span class="keyword">new</span> Stack&lt;TreeNode&gt;(); <span class="comment">// 利用栈进行临时存储</span></span><br><span class="line">	stack.push(root);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span> (!stack.isEmpty()) &#123;</span><br><span class="line">		TreeNode node = stack.pop(); <span class="comment">// 取出一个节点，表示开始访问以该节点为根的子树</span></span><br><span class="line">		visit(node); <span class="comment">// 首先访问该节点（先序），之后顺序入栈右子树、左子树</span></span><br><span class="line">		<span class="keyword">if</span> (node.right != <span class="keyword">null</span>) stack.push(node.right);</span><br><span class="line">		<span class="keyword">if</span> (node.left != <span class="keyword">null</span>) stack.push(node.left);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果二叉树的结构如图所示，那么栈的大小只要能容纳两个节点就够了，所以这种方法的空间复杂度与二叉树的深度有关，最好和平均为O(logN)，最坏为O(N);</p>
+<p><img src="/2020/09/24/algorithm-leetcode501/erchashu.png" alt="erchashu"></p>
+<p>而Morris遍历却不一样，它通过对子节点引用的更改来实现后续节点的保存，所以仅仅通过O(1)的空间复杂度实现了二叉树的遍历（大神就是不一样…）</p>
+<h3 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h3><p>1、<a href="https://leetcode-cn.com/problems/binary-tree-inorder-traversal/solution/xue-xi-yi-xia-morrissuan-fa-by-jerry_nju-2/" target="_blank" rel="noopener">力扣501题解</a></p>
+<p>2、<a href="https://ghh3809.github.io/2018/08/06/morris-traversal/" target="_blank" rel="noopener">经典算法小评</a></p>
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>morris算法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【RPM Packaging Guide】</title>
+    <url>/2020/08/31/RPMPackagingGuide/</url>
+    <content><![CDATA[<p>翻译《RPM Packaging Guide》顺便学习一下~</p>
+<a id="more"></a>
+
+<h1 id="绪论"><a href="#绪论" class="headerlink" title="绪论"></a>绪论</h1><p>RPM 打包指导文档：</p>
+<p><strong>准备打包需要的源代码</strong></p>
+<p>这部分为没有软件开发背景的人所写，详见：<a href>准备打包需要的软件</a></p>
+<p><strong>如何将源码打包成rpm包</strong></p>
+<p>这部分介绍将源码打包成rpm包，详见：<a href>打包软件</a></p>
+<p><strong>高级打包技巧</strong></p>
+<p>这部分提供给需要在复杂场景打包的人员作为参考材料，详见：<a href>高级用法</a></p>
+<h2 id="PDF-版本"><a href="#PDF-版本" class="headerlink" title="PDF 版本"></a>PDF 版本</h2><p>你可以在<a href="https://rpm-packaging-guide.github.io/rpm-packaging-guide.pdf" target="_blank" rel="noopener">这里</a>下载文档PDF版本 </p>
+<h2 id="文档规范"><a href="#文档规范" class="headerlink" title="文档规范"></a>文档规范</h2><p>本文使用如下规范：</p>
+<ul>
+<li><p>命令输入以及文本文件的内容，包括源代码以块的方式排列：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ tree ~&#x2F;rpmbuild&#x2F;</span><br><span class="line">&#x2F;home&#x2F;user&#x2F;rpmbuild&#x2F;</span><br><span class="line">|-- BUILD</span><br><span class="line">|-- RPMS</span><br><span class="line"></span><br><span class="line">[command output trimmed]</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Name:           bello</span><br><span class="line">Version:</span><br><span class="line">Release:        1%&#123;?dist&#125;</span><br><span class="line">Summary:</span><br><span class="line"></span><br><span class="line">[file contents trimmed]</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"></span><br><span class="line">print(<span class="string">"Hello World"</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>著作翻译</category>
+      </categories>
+      <tags>
+        <tag>rpm打包</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【Hello World】</title>
+    <url>/2020/07/21/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+<a id="more"></a>
+
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+]]></content>
   </entry>
   <entry>
     <title>【learn Git Branching】</title>
@@ -441,6 +286,161 @@
       </categories>
       <tags>
         <tag>git学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【每天学点算法系列】链表与环的探究</title>
+    <url>/2020/10/26/listAndCircle/</url>
+    <content><![CDATA[<p>最近看了一点 Floyd cycle detection（弗洛伊德判圈算法），觉得有点意思，特此整理了一下…</p>
+<a id="more"></a>
+
+<p><strong>关于一个链表与环可能会遇到的问题</strong>：</p>
+<blockquote>
+<ol>
+<li>判断一个链表是否有环？</li>
+<li>找出环的起始位置；</li>
+<li>找出环的大小；</li>
+<li>求链表的长度：起始位置+环的大小</li>
+<li>如果存在环，求出环上任意一个节点最远的点</li>
+<li>如何判断两个无环链表是否相交</li>
+<li>如果相交，求出第一个相交的点；</li>
+</ol>
+</blockquote>
+<h3 id="判断一个链表是否有环"><a href="#判断一个链表是否有环" class="headerlink" title="判断一个链表是否有环"></a>判断一个链表是否有环</h3><p>快慢指针算法</p>
+<p>// loading…</p>
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>链表</tag>
+        <tag>环</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【multi-agent-simulation】社会力模型演示</title>
+    <url>/2021/01/31/multi-agent-simulation/</url>
+    <content><![CDATA[<p>近日有幸接触到robot跟随方面的研究，而跟随方向的论文大都提到了Social force model【社会力模型】，这个概念最早可追溯到Dirk Helbing在1995年的论文[Social force model for pedestrian dynamics]….</p>
+<a id="more"></a>
+
+<h3 id="论文"><a href="#论文" class="headerlink" title="论文"></a>论文</h3><p><img src="/2021/01/31/multi-agent-simulation/IMG_0010.jpg" alt="IMG_0010"></p>
+<p>大致就是我上面描述的这个意思，核心思想就是把微观世界中的相互作用力引入到宏观世界，比如人类社会；一个人如果想要跟随另一个人应该怎么运动才能避免碰撞到周围的人，同时又能很好地跟随目标，社会力模型提供了一个思路。</p>
+<p>注：社会力模型在不同的论文中有很多变化，考虑的维度也不一样如果你认为我说的不对，那么以你的为准；</p>
+<h3 id="github项目"><a href="#github项目" class="headerlink" title="github项目"></a>github项目</h3><p><a href="https://github.com/my-HenryS/multi-agent-simulation" target="_blank" rel="noopener">multi-agent-simulation</a>是github上一个开源项目，时间比较久了博主后面基本没怎么维护，不过拿来跑跑，看一下效果还是可以的；配置好maven，JDK，直接导入，运行SimulationPanelMain；</p>
+<p>项目具体描述参考readme文件</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">欲开始运行仿真请打开app包，并运行其中的一个Main程序。Gui内的SimulationPanelMain是可视化的仿真界面，主要用于演示；Console内的TextOutputMain是可以将运行结果以字符串形式输出的Main程序，主要用于输出具体的数据以便实验使用。</span><br><span class="line"></span><br><span class="line">项目分为5个package，分别为app、container、drawer、geom、model</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2021/01/31/multi-agent-simulation/ScreenShot2021-02-04at06.54.16.png" alt="Screen Shot 2021-02-04 at 06.54.16"></p>
+<p>运行成功之后会出现如下所示，选择Simulation Mode，然后可以选择模拟的场景，比如：ApplicationForSubway</p>
+<p><img src="/2021/01/31/multi-agent-simulation/image-20210204065949988.png" alt="image-20210204065949988"></p>
+<p>目前只看到了subway和Cross Flow场景是可以正常run起来的，其他的场景估计要加载配置，不过效果就是这样；相关的算法，节点数量，障碍物设置都是可以自己调整的，对于整个社会力模型的认识是有帮助的；如果做跟随路径规划，也可以在模型中先跑一跑看一下效果；</p>
+<p><img src="/2021/01/31/multi-agent-simulation/2021-02-0407.05.50.gif" alt="2021-02-04 07.05.50"></p>
+<p>好了本次的github项目分享就到这里，后面看到有趣的好玩的github项目，会继续发出来让更多的人知道…</p>
+]]></content>
+      <categories>
+        <category>github项目</category>
+      </categories>
+      <tags>
+        <tag>社会力模型</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【The Clean Coder】</title>
+    <url>/2021/02/15/theCleanCoder/</url>
+    <content><![CDATA[<p>花了大概2个小时，读完了Bob大叔的这本《代码整洁之道——程序员的职业素养》有种斜躺在沙发上整日阅读叔本华的感觉….</p>
+<a id="more"></a>
+
+<p>书中很多细节的表述直抵内心，比如妻子怀胎两月时自己被公司开除的羞愧；两周垒完一个应用+后台+存储时的狼狈；自己幼年参照手册完成逻辑门的欢呼雀跃～这些情节总是能对照自身找到共鸣。大学时为了加入acm班绞尽脑汁第一个写出找素数程序，还被同学夸奖说学得快；面试时作为物联网专业毕业生不知道iot的尴尬以及说不出什么是软件工程的羞愧；工作中技术分享会由于太紧张还有准备不充分被大佬怼得哑口无言… </p>
+<p>大学教育其实不能为我们带来职业素养，程序员真正重要的东西往往都是在职业发展中，在工作中，在一个个狼狈不堪的项目中学到的。这本书就像是为你讲述Bob大叔，这么一位人们公认的大神他的成长之路，你会觉得也不过如此，没有什么捷径，都是在辛勤的劳累和思考中获得的，我们也能做到。</p>
+<p>书中关于职业素养讲了很多，印象较深的有拒绝。懂得拒绝是职业素养很重要的一点。有时候迫于领导的权威，我们可能会答应，最后交付一堆烂代码，这是极其不负责任的。还有一个人的精力是有限的，如何做好时间管理，不要为了细枝末节浪费了你有限的魔力点数。关于日常要做卡塔练习，因为两个对手干架的时候，最先启动的是肌肉记忆，上层大脑的策略逻辑永远是慢一拍的。还有和团队的协作，工具的使用等等，强烈建议每个有志成为专业程序员的人都能通读一遍，从中受益。</p>
+]]></content>
+      <categories>
+        <category>读书笔记</category>
+      </categories>
+      <tags>
+        <tag>代码整洁之道</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【2020科学上网日记】</title>
+    <url>/2020/12/09/scienceOnline2020/</url>
+    <content><![CDATA[<p>那一天，人类回想起了，曾经被那堵墙支配的恐惧，以及被囚禁在鸟笼中的屈辱…</p>
+<p>—-节选自《2020科学上网日记》</p>
+<a id="more"></a>
+
+<p>很久很久以前，那个时候是可以直接访问Google、Facebook、Twitter、Instagram等国外网站的。</p>
+<p><img src="/2020/12/09/scienceOnline2020/ScreenShot2020-12-09at21.41.58.png" alt="ScreenShot2020-12-09at21.41.58"></p>
+<p>突然有一天，一堵名为GFW（Great Firewall）的大墙挡在了中间，从此生活便少了诸多色彩。</p>
+<p><img src="/2020/12/09/scienceOnline2020/ScreenShot2020-12-09at21.50.13.png" alt="Screen Shot 2020-12-09 at 21.50.13"></p>
+<p>终于有一天，一个叫SSH Server的东西出现了，它改变了我的世界。它生来就与众不同，我们访问它可以不经过GFW，而他可以访问外面的世界不受GFW的影响。如此我们之后就可以请他代替我们访问一些被GFW墙掉的网站，然后再将内容发给我们。</p>
+<p><img src="/2020/12/09/scienceOnline2020/ScreenShot2020-12-09at21.51.20.png" alt="Screen Shot 2020-12-09 at 21.51.20"></p>
+<p>但是，GFW不甘心这种东西的存在，而ssh本身的特征是明显的，GFW便可以分析连接特征去搞搞小破坏，干扰我们的开心生活。于是ss便出现了。</p>
+<p><img src="/2020/12/09/scienceOnline2020/ScreenShot2020-12-09at21.51.59.png" alt="Screen Shot 2020-12-09 at 21.51.59"></p>
+<h3 id="安装配置"><a href="#安装配置" class="headerlink" title="安装配置"></a>安装配置</h3><p>环境工具：Vultr + v2ray</p>
+<h4 id="一、首先买一台墙外的服务器，作为SS-Server，推荐选择Vultr。"><a href="#一、首先买一台墙外的服务器，作为SS-Server，推荐选择Vultr。" class="headerlink" title="一、首先买一台墙外的服务器，作为SS Server，推荐选择Vultr。"></a>一、首先买一台墙外的服务器，作为SS Server，推荐选择Vultr。</h4><blockquote>
+<p>有很多国外服务商，像aws、google、vultr、搬瓦工，等等。aws可以免费一年，google也类似，但是国外的网站可能不符合咱的操作习惯，很多用起来很麻烦，对小白太累，而且aws每个月只免费1G流量，他们还需要信用卡绑定，有些学生又没有信用卡。所以我们可能会选择搬瓦工或者vultr这种操作简单，支持支付宝支付的商家。就我来说，我喜欢vultr，按小时计费，可以随时删除服务器，应对ip被封的情况，而且价格相对便宜，网站简洁，操作简单，支持支付宝微信支付。搬瓦工相对vultr要便宜一点，但是一般是月付或者年付，万一被封ip，可能就亏了，但是对于买来还有其他用途的人来说，搬瓦工也是个不错的选择哦</p>
+</blockquote>
+<p>访问<a href="https://www.vultr.com/" target="_blank" rel="noopener">Vultr官网</a>注册账号，验证邮箱</p>
+<p><img src="/2020/12/09/scienceOnline2020/ScreenShot2020-12-09at21.57.27.png" alt="Screen Shot 2020-12-09 at 21.57.27"></p>
+<p>账户没钱记得存点钱，可以使用支付宝</p>
+<p><img src="/2020/12/09/scienceOnline2020/ScreenShot2020-12-09at22.02.38.png" alt="Screen Shot 2020-12-09 at 22.02.38"></p>
+<p>选择Products，购买一台服务器，推荐（Tokyo - Ubuntu 18.04 X64 - $5/mo）</p>
+<p><img src="/2020/12/09/scienceOnline2020/ScreenShot2020-12-09at21.59.46.png" alt="Screen Shot 2020-12-09 at 21.59.46"></p>
+<p>Deploy Now完成后就可以看到创建的实例了，比如我的</p>
+<p><img src="/2020/12/09/scienceOnline2020/ScreenShot2020-12-09at22.05.17.png" alt="Screen Shot 2020-12-09 at 22.05.17"></p>
+<p>MAC 可以使用ShellCraft连接服务器，Host是你的服务器IP，端口22不变，User name是root，Password 服务器详情中查看。</p>
+<p><img src="/2020/12/09/scienceOnline2020/ScreenShot2020-12-09at22.08.07.png" alt="Screen Shot 2020-12-09 at 22.08.07"></p>
+<p><img src="/2020/12/09/scienceOnline2020/ScreenShot2020-12-09at22.09.36.png" alt="Screen Shot 2020-12-09 at 22.09.36"></p>
+<p>连接成功之后如下：</p>
+<p><img src="/2020/12/09/scienceOnline2020/ScreenShot2020-12-09at22.11.25.png" alt="Screen Shot 2020-12-09 at 22.11.25"></p>
+<h4 id="二、配置SS-Server"><a href="#二、配置SS-Server" class="headerlink" title="二、配置SS Server"></a>二、配置SS Server</h4><p>服务器买了当然要配置一下，不然怎么在墙外接收你的request呢，推荐使用V2ray因为更稳定，一键安装：</p>
+<p>将以下命令复制到你已连接的服务器命令行中，然后就是一步一步下一步</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">bash &lt;(curl -s -L https://git.io/v2ray.sh)</span><br></pre></td></tr></table></figure>
+
+<p>选择1，按回车</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"> 1. 安装</span><br><span class="line"> 2. 卸载</span><br><span class="line">请选择 [1-2]:1</span><br></pre></td></tr></table></figure>
+
+<p>用默认的tcp就行，直接回车</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">请选择 V2Ray 传输协议 [1-32]</span><br><span class="line">  1. TCP</span><br><span class="line">  2. TCP_HTTP</span><br><span class="line">  3. WebSocket</span><br><span class="line">  4. WebSocket + TLS</span><br><span class="line">  5. HTTP&#x2F;2</span><br><span class="line">  6. mKCP</span><br><span class="line">  7. mKCP_utp</span><br><span class="line">  8. mKCP_srtp</span><br><span class="line">  9. mKCP_wechat-video</span><br><span class="line"> 10. mKCP_dtls</span><br><span class="line"> 11. mKCP_wireguard</span><br><span class="line"> 12. QUIC</span><br><span class="line"> 13. QUIC_utp</span><br><span class="line"> 14. QUIC_srtp</span><br><span class="line"> 15. QUIC_wechat-video</span><br><span class="line"> 16. QUIC_dtls</span><br><span class="line"> 17. QUIC_wireguard</span><br><span class="line"> 18. TCP_dynamicPort</span><br><span class="line"> 19. TCP_HTTP_dynamicPort</span><br><span class="line"> 20. WebSocket_dynamicPort</span><br><span class="line"> 21. mKCP_dynamicPort</span><br><span class="line"> 22. mKCP_utp_dynamicPort</span><br><span class="line"> 23. mKCP_srtp_dynamicPort</span><br><span class="line"> 24. mKCP_wechat-video_dynamicPort</span><br><span class="line"> 25. mKCP_dtls_dynamicPort</span><br><span class="line"> 26. mKCP_wireguard_dynamicPort</span><br><span class="line"> 27. QUIC_dynamicPort</span><br><span class="line"> 28. QUIC_utp_dynamicPort</span><br><span class="line"> 29. QUIC_srtp_dynamicPort</span><br><span class="line"> 30. QUIC_wechat-video_dynamicPort</span><br><span class="line"> 31. QUIC_dtls_dynamicPort</span><br><span class="line"> 32. QUIC_wireguard_dynamicPort</span><br><span class="line">备注1: 含有 [dynamicPort] 的即启用动态端口..</span><br><span class="line">备注2: [utp | srtp | wechat-video | dtls | wireguard] 分别伪装成 [BT下载 | 视频通话 | 微信视频通话 | DTLS 1.2 数据包 | WireGuard 数据包]</span><br><span class="line">(默认协议: TCP):</span><br></pre></td></tr></table></figure>
+
+<p>端口随便写一个，范围1025到65535，也可以选择默认，直接回车</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">请输入 V2Ray 端口 [1-65535]</span><br><span class="line">(默认端口: 22681):</span><br></pre></td></tr></table></figure>
+
+<p>这个也不知道真影响假影响，姑且相信他，使用默认，直接回车</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">是否开启广告拦截(会影响性能) [Y&#x2F;N]</span><br><span class="line">(默认 [N]):</span><br></pre></td></tr></table></figure>
+
+<p>是不是顺便把ss服务也装了，这个就随便你了，我感觉用了v2ray也没必要再搭ss，毕竟s’s很容易被封，所以保持默认，回车</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">是否配置 Shadowsocks [Y&#x2F;N]</span><br><span class="line">(默认 [N]):</span><br></pre></td></tr></table></figure>
+
+<p>会让你确认一下信息，确认无误，按回车</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">---------- 安装信息 -------------</span><br><span class="line"> V2Ray 传输协议 &#x3D; TCP</span><br><span class="line"> V2Ray 端口 &#x3D; 22681</span><br><span class="line"> 是否配置 Shadowsocks &#x3D; 未配置</span><br><span class="line">---------- END -------------</span><br><span class="line">按 Enter 回车键 继续....或按 Ctrl + C 取消.</span><br></pre></td></tr></table></figure>
+
+<p>然后，就是等…</p>
+<p>安装完成，最后会提示你连接配置信息：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">---------- V2Ray 配置信息 -------------</span><br><span class="line"> 地址 (Address) &#x3D; 152.89.208.146</span><br><span class="line"> 端口 (Port) &#x3D; 47283</span><br><span class="line"> 用户ID (User ID &#x2F; UUID) &#x3D; ed0b4117-0f5a-41e9-a732-96bdaf343d23</span><br><span class="line"> 额外ID (Alter Id) &#x3D; 233</span><br><span class="line"> 传输协议 (Network) &#x3D; tcp</span><br><span class="line"> 伪装类型 (header type) &#x3D; none</span><br><span class="line">---------- END -------------</span><br></pre></td></tr></table></figure>
+
+<p>也可以通过命令<code>v2ray url</code> 和 <code>v2ray qr</code> 获取v2ray url和v2ray QRCode</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">root@ONEVPS190911085532:~# v2ray url</span><br><span class="line">---------- V2Ray vmess URL &#x2F; V2RayNG v0.4.1+ &#x2F; V2RayN v2.1+ &#x2F; 仅适合部分客户端 -------------</span><br><span class="line">vmess:&#x2F;&#x2F;ewoidiI6ICIyIiwKInBzIjogIjIzM3YyLmNvbV8xNTIuODkuMjA4LjE0NiIsCiJhZGQiOiAiMTUyLjg5LjIwOC4xNDYiLAoicG9ydCI6ICI0NzI4MyIsCiJpZCI6ICJlZDBiNDExNy0wZjVhLTQxZTktYTczMi05NmJkYWYzNDNkMjMiLAoiYWlkIjogIjIzMyIsCiJuZXQiOiAidGNwIiwKInR5cGUiOiAibm9uZSIsCiJob3N0IjogIiIsCiJwYXRoIjogIiIsCiJ0bHMiOiAiIgp9Cg&#x3D;&#x3D;</span><br><span class="line">root@ONEVPS190911085532:~# v2ray qr</span><br><span class="line">---------- V2Ray 二维码链接 适用于 V2RayNG v0.4.1+ &#x2F; Kitsunebi -------------</span><br><span class="line">https:&#x2F;&#x2F;233boy.github.io&#x2F;tools&#x2F;qr.html#vmess:&#x2F;&#x2F;ewoidiI6ICIyIiwKInBzIjogIjIzM3YyLmNvbV8xNTIuODkuMjA4LjE0NiIsCiJhZGQiOiAiMTUyLjg5LjIwOC4xNDYiLAoicG9ydCI6ICI0NzI4MyIsCiJpZCI6ICJlZDBiNDExNy0wZjVhLTQxZTktYTczMi05NmJkYWYzNDNkMjMiLAoiYWlkIjogIjIzMyIsCiJuZXQiOiAidGNwIiwKInR5cGUiOiAibm9uZSIsCiJob3N0IjogIiIsCiJwYXRoIjogIiIsCiJ0bHMiOiAiIgp9Cg&#x3D;&#x3D;</span><br><span class="line"> 友情提醒: 请务必核对扫码结果 (V2RayNG 除外)</span><br></pre></td></tr></table></figure>
+
+<h4 id="三、配置客户端"><a href="#三、配置客户端" class="headerlink" title="三、配置客户端"></a>三、配置客户端</h4><p>既然SS Server 配置好了，那就搞SS Local了，如果你用mac OS就下个V2RayX，如果你用Android手机就下个v2rayNG</p>
+<p><a href="https://tlanyan.me/v2ray-clients-download/" target="_blank" rel="noopener">V2Ray客户端下载地址</a></p>
+<p>比如MAC：打开客户端，选择Config，配置上一步生成的Address、Port、User ID、Alter Id即可，也可以通过导入url来自动配置；</p>
+<p><img src="/2020/12/09/scienceOnline2020/ScreenShot2020-12-09at22.22.14.png" alt="Screen Shot 2020-12-09 at 22.22.14"></p>
+<p><img src="/2020/12/09/scienceOnline2020/ScreenShot2020-12-09at22.23.07.png" alt="Screen Shot 2020-12-09 at 22.23.07"></p>
+<p>配置完成后，选择PAC Mode, 然后点击load core就是开启了服务；</p>
+<p><img src="/2020/12/09/scienceOnline2020/ScreenShot2020-12-09at22.27.02.png" alt="Screen Shot 2020-12-09 at 22.27.02"></p>
+<p>然后就可以打开谷歌浏览器看下youtube是不是可以正常访问啦， da’gong’gao’cheng</p>
+<p><img src="/2020/12/09/scienceOnline2020/ScreenShot2020-12-09at22.28.54.png" alt="Screen Shot 2020-12-09 at 22.28.54"></p>
+<p>安卓手机或者其他设备同理，只需要安装V2Ray客户端，配置好即可，记得给服务器续费…</p>
+<h5 id="参考文档："><a href="#参考文档：" class="headerlink" title="参考文档："></a>参考文档：</h5><p>1、<a href="https://viencoding.com/article/114" target="_blank" rel="noopener">Vultr注册并购买服务器搭VPN</a></p>
+<p>2、<a href="https://viencoding.com/article/207" target="_blank" rel="noopener">如何搭建v2ray，放弃使用ss和ssr</a></p>
+<p>3、<a href="https://viencoding.com/article/155" target="_blank" rel="noopener">搭梯子</a></p>
+]]></content>
+      <categories>
+        <category>环境配置</category>
+      </categories>
+      <tags>
+        <tag>科学上网</tag>
       </tags>
   </entry>
 </search>
