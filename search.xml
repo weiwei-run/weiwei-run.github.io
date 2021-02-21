@@ -83,7 +83,16 @@
 <p>2、当子线程中的UI需要更新时，创建一个Message对象，并且通过Handler对象调用sendMessage方法，将这条消息发送出去；</p>
 <p>3、这条消息就被添加到MessageQueue队列中等待被处理，而Looper则会一直尝试从MessageQueue中取出待处理的消息，最后发回给Handler的handlerMessage方法中。</p>
 <p>4、由于Handler是在主线程中创建的，所以此时handleMessage方法中的代码也会在主线程中运行；</p>
-<h2 id="BroadcastReceiver"><a href="#BroadcastReceiver" class="headerlink" title="BroadcastReceiver"></a>BroadcastReceiver</h2><h3 id="遗留问题"><a href="#遗留问题" class="headerlink" title="遗留问题"></a>遗留问题</h3><p>1、app/build.gradle与项目下的build.gradle分别是什么文件？有什么作用？</p>
+<h2 id="BroadcastReceiver"><a href="#BroadcastReceiver" class="headerlink" title="BroadcastReceiver"></a>BroadcastReceiver</h2><p>广播：标准广播、有序广播</p>
+<p>注册方式：动态注册、静态注册</p>
+<h3 id="如何创建一个广播接收器"><a href="#如何创建一个广播接收器" class="headerlink" title="如何创建一个广播接收器"></a>如何创建一个广播接收器</h3><p>只需要新建一个类，让它继承BroadcastReceiver，并重写父类的onReceive() 方法。这样当有广播到来时，onReceive方法就会得到执行，具体处理逻辑可以写在这个方法里；比如一个监听网络变化的程序：</p>
+<p>1、创建一个NetworkChangeReceiver类继承BroadcastReceiver</p>
+<p>2、重写onReceive方法处理逻辑就是弹出一个toast提示；</p>
+<p>3、创建一个IntentFilter对象实例，添加对网络状态变化的广播进行监听（当网络发生变化时，系统会发出一条值为android.net.conn.CONNECTIVITY_CHANGE的广播）</p>
+<p>4、注册广播registerReceiver传入两个参数，一个是BroadcastReceiver实例，一个是InterFilter实例；</p>
+<p>5、这样就写完了，当网络状态发生变化时，系统会发出一条广播，而这条广播被NetworkChangeReceiver监听到从而执行onReceive方法，弹出toast提示；</p>
+<p><img src="/2021/02/05/AndroidColumn/image-20210222072241380.png" alt="image-20210222072241380"></p>
+<h2 id="遗留问题"><a href="#遗留问题" class="headerlink" title="遗留问题"></a>遗留问题</h2><p>1、app/build.gradle与项目下的build.gradle分别是什么文件？有什么作用？</p>
 <p>参考文档：</p>
 <ol>
 <li><p><a href="https://developer.android.google.cn/guide?hl=zh_cn" target="_blank" rel="noopener">Android Developers</a></p>
