@@ -481,4 +481,32 @@
         <tag>科学上网</tag>
       </tags>
   </entry>
+  <entry>
+    <title>【basic-computer-games】games?</title>
+    <url>/2021/03/01/basic-computer-games/</url>
+    <content><![CDATA[<p>没事闲逛 <a href="https://github.com/trending" target="_blank" rel="noopener">github Trending</a>，这里总是能发现让人眼前一亮的项目，今日star排名No.1的是一个叫<code>basic-computer-games</code> 的项目，看到与游戏相关立刻就有了兴致….</p>
+<a id="more"></a>
+
+<p>作者收集了一些《<em>BASIC Computer Games</em>》书中的游戏，用C/JAVA/PYTHON/等语言重写，归档到这个github 项目下，目前已经更新了96个小游戏；我一看，好家伙，1973年的书，比我出生还早20年不止，真的是老古董了，话不多说，先试玩一下;</p>
+<h3 id="安装VB"><a href="#安装VB" class="headerlink" title="安装VB"></a>安装VB</h3><p>玩这些个古董游戏就需要古董语言的支持，所以首先装一下VB，MAC下只需要下载一下个包，解压就行了不需要安装；<a href="http://www.vintage-basic.net/download.html" target="_blank" rel="noopener">下载地址</a></p>
+<p><img src="/2021/03/01/basic-computer-games/image-20210302001038031.png" alt="image-20210302001038031"></p>
+<h3 id="aceyducey-游戏"><a href="#aceyducey-游戏" class="headerlink" title="aceyducey 游戏"></a>aceyducey 游戏</h3><p>下载解压好之后，直接执行<code>vintbas aceyducey.bas</code> 就行运行第一个游戏aceyducey了；vintbas在bin目录下，而aceyducey.bas的游戏源代码可以在github中找到 <a href="https://github.com/coding-horror/basic-computer-games/blob/main/01%20Acey%20Ducey/aceyducey.bas" target="_blank" rel="noopener">源码</a>; </p>
+<p><img src="/2021/03/01/basic-computer-games/image-20210302001625743.png" alt="image-20210302001625743"></p>
+<p>看样子介绍是个猜牌游戏，系统会随机给你两张牌，你猜下一张随机给出的牌是不是在两者之间，并下注一定的金额；本轮也可以选择放弃，输入0即可轮空，直接进行下一轮；如果猜中则你获胜并赢得下注的奖金，如果猜不中则下注的金额被收回；直到你没钱了，这个游戏就结束了；</p>
+<h3 id="Tips"><a href="#Tips" class="headerlink" title="Tips"></a>Tips</h3><p>我玩了几把之后总结了几点：</p>
+<p>1、牌的大小顺序是2、3、4、、、JACK、QUEEN、KING、ACE；</p>
+<p>2、在两者之间不包括两者，比如7，8；这一轮你永远不可能赢，只能选择轮空，输入0；</p>
+<p><img src="/2021/03/01/basic-computer-games/image-20210302002549648.png" alt="image-20210302002549648"></p>
+<p>3、牌的数量是无限的，这不是一副扑克牌，因为看代码逻辑每次都是随机生成的牌，没有数量限制；</p>
+<figure class="highlight basic"><table><tr><td class="code"><pre><span class="line"><span class="symbol">260 </span><span class="keyword">PRINT</span><span class="string">"HERE ARE YOUR NEXT TWO CARDS: "</span></span><br><span class="line"><span class="symbol">270 </span>A=<span class="keyword">INT</span>(<span class="number">14</span>*<span class="keyword">RND</span>(<span class="number">1</span>))+<span class="number">2</span></span><br><span class="line"><span class="symbol">280 </span><span class="keyword">IF</span> A&lt;<span class="number">2</span> <span class="keyword">THEN</span> <span class="number">270</span></span><br><span class="line"><span class="symbol">290 </span><span class="keyword">IF</span> A&gt;<span class="number">14</span> <span class="keyword">THEN</span> <span class="number">270</span></span><br><span class="line"><span class="symbol">300 </span>B=<span class="keyword">INT</span>(<span class="number">14</span>*<span class="keyword">RND</span>(<span class="number">1</span>))+<span class="number">2</span></span><br><span class="line"><span class="symbol">310 </span><span class="keyword">IF</span> B&lt;<span class="number">2</span> <span class="keyword">THEN</span> <span class="number">300</span></span><br><span class="line"><span class="symbol">320 </span><span class="keyword">IF</span> B&gt;<span class="number">14</span> <span class="keyword">THEN</span> <span class="number">300</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h3><p>很多很多小游戏，等待我去探索，后面遇到有好玩的再说，今天先试水一下…</p>
+]]></content>
+      <categories>
+        <category>github项目</category>
+      </categories>
+      <tags>
+        <tag>games</tag>
+      </tags>
+  </entry>
 </search>
