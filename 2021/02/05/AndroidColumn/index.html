@@ -1,0 +1,1389 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="code-GgAAEXctsE" />
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Special Elite:300,300italic,400,400italic,700,700italic|Special Elite:300,300italic,400,400italic,700,700italic|Special Elite:300,300italic,400,400italic,700,700italic|ZCOOL KuaiLe:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/naruto.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/naruto.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Android专栏," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="最近在做Iot开发免不了接触到一些Android的技术，所以出个专栏记录一下…">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【Android专栏】">
+<meta property="og:url" content="http://weiwei.run/2021/02/05/AndroidColumn/index.html">
+<meta property="og:site_name" content="traffic_millions">
+<meta property="og:description" content="最近在做Iot开发免不了接触到一些Android的技术，所以出个专栏记录一下…">
+<meta property="og:image" content="http://weiwei.run/2021/02/05/AndroidColumn/WechatIMG3.jpeg">
+<meta property="og:image" content="http://weiwei.run/2021/02/05/AndroidColumn/IMG_4C4BD5625EC8-1.jpeg">
+<meta property="og:image" content="http://weiwei.run/2021/02/05/AndroidColumn/IMG_4611D38DE043-1.jpeg">
+<meta property="og:image" content="http://weiwei.run/2021/02/05/AndroidColumn/image-20210205072610547.png">
+<meta property="og:image" content="http://weiwei.run/2021/02/05/AndroidColumn/image-20210205073023194.png">
+<meta property="og:image" content="http://weiwei.run/2021/02/05/AndroidColumn/image-20210205073348914.png">
+<meta property="og:image" content="http://weiwei.run/2021/02/05/AndroidColumn/image-20210205073855388.png">
+<meta property="og:image" content="http://weiwei.run/2021/02/05/AndroidColumn/IMG_C6B5DC689770-1.jpeg">
+<meta property="og:image" content="http://weiwei.run/2021/02/05/AndroidColumn/IMG_1FD13F738572-1.jpeg">
+<meta property="og:image" content="http://weiwei.run/2021/02/05/AndroidColumn/image-20210214072108173.png">
+<meta property="og:image" content="http://weiwei.run/2021/02/05/AndroidColumn/image-20210214072805210.png">
+<meta property="og:image" content="http://weiwei.run/2021/02/05/AndroidColumn/IMG_D6D1AC18EFAE-1.png">
+<meta property="og:image" content="http://weiwei.run/2021/02/05/AndroidColumn/image-20210222072241380.png">
+<meta property="og:image" content="http://weiwei.run/2021/02/05/AndroidColumn/image-20210729073451961.png">
+<meta property="og:image" content="http://weiwei.run/2021/02/05/AndroidColumn/Screen-Shot-2021-07-27-at-22.45.13.png">
+<meta property="article:published_time" content="2021-02-04T22:22:49.000Z">
+<meta property="article:modified_time" content="2021-07-28T23:38:23.137Z">
+<meta property="article:author" content="weiwei">
+<meta property="article:tag" content="Android专栏">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://weiwei.run/2021/02/05/AndroidColumn/WechatIMG3.jpeg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://weiwei.run/2021/02/05/AndroidColumn/"/>
+
+
+
+
+
+  <title>【Android专栏】 | traffic_millions</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">traffic_millions</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://weiwei.run/2021/02/05/AndroidColumn/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="weiwei">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="traffic_millions">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">【Android专栏】</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-02-05T06:22:49+08:00">
+                2021-02-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2021/02/05/AndroidColumn/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2021/02/05/AndroidColumn/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>最近在做Iot开发免不了接触到一些Android的技术，所以出个专栏记录一下…</p>
+<a id="more"></a>
+
+<h2 id="源起"><a href="#源起" class="headerlink" title="源起"></a>源起</h2><p>从在手机上点击一个应用的图标说起</p>
+<p>1、首先点击事件会传递给launcher；Launcher其实也是一个app，它是我们开机之后看到的第一个app，它主要用于显示和管理手机上的其他应用，你也可以自己制作一个launcher，比如：</p>
+<p><img src="/2021/02/05/AndroidColumn/WechatIMG3.jpeg" alt="WechatIMG3"></p>
+<p>2、点击事件会由launcher构造成一个Intent意图，然后通过startActivity方法传递给ActivityManagerService；AMS是在SystemServer进程中启动的，它比launcher初始化要更早一些；</p>
+<p>3、然后AMS通过Process.start方法通知到Zygote进程；Zygote进程比SystemServer进程还要早一些存在；关于进程之间的存在先后顺序参考下图，整个Android系统的启动分为linux kernel的启动和android的启动，linux kernel运行起来之后，Android的第一个程序就是init process，主要是一些配置和解析动作，然后就陷入了等待；</p>
+<p>很明显能够看出Zygote进程是先于System Server进程之前启动的，且后者是前者fork出来的进程；</p>
+<p><img src="/2021/02/05/AndroidColumn/IMG_4C4BD5625EC8-1.jpeg" alt="IMG_4C4BD5625EC8-1"></p>
+<p>4、Zygote收到AMS的通知后会fork一个新的进程，而新的进程会从新启应用的ActivityThread开始运行，加载app，创建一个activity对象，这些都是在ActivityThread的mainLoop方法中执行的，然后ActivityThread就陷入了循环；</p>
+<p>5、最后ActivityManagerService回调上一步创建activity对象的生命周期方法，onCreate、onStart、onResume然后你就能看到新启应用的页面啦，实际上还有很多细节，不过大致流程就是这样。</p>
+<p><img src="/2021/02/05/AndroidColumn/IMG_4611D38DE043-1.jpeg" alt="IMG_4611D38DE043-1"></p>
+<h2 id="基础概念"><a href="#基础概念" class="headerlink" title="基础概念"></a>基础概念</h2><p>1、apk是由什么组成的？</p>
+<p><img src="/2021/02/05/AndroidColumn/image-20210205072610547.png" alt="image-20210205072610547"></p>
+<p>找了一个Google浏览器的安装包，解压缩可以看到有AndroidManifest.xml、assets文件夹、dex文件、lib文件夹、META-INF文件夹、res文件夹、一个arsc文件和一个sha256文件；</p>
+<ul>
+<li><p>AndroidManifest.xml：每个应用都必定会有一个AndroidManifest.xml，它描述了应用的名字、版本、权限、引用的库文件等；</p>
+</li>
+<li><p>assets文件夹：里面包含了一些适配不同语言相关的文件，还有一些版本描述的文件，有些apk可能没有assets文件夹，这个目录不是apk所必须的；<img src="/2021/02/05/AndroidColumn/image-20210205073023194.png" alt="image-20210205073023194"></p>
+</li>
+<li><p>dex文件：apk都会有，这些dex就是java或者kotlin编译之后生成的二进制文件；</p>
+</li>
+<li><p>lib文件夹：存放了一些Jni代码编译生成后的so文件，动态库文件；类似于window的dll文件；</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.o 就相当于windows里的obj文件 ，一个.c或.cpp文件对应一个.o文件</span><br><span class="line">.a 是好多个.o合在一起,用于静态连接 ，即STATIC mode，多个.a可以链接生成一个exe的可执行文件</span><br><span class="line">.so 是shared object,用于动态连接的,和windows的dll差不多，使用时才载入</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2021/02/05/AndroidColumn/image-20210205073348914.png" alt="image-20210205073348914"></p>
+</li>
+<li><p>META-INF文件夹:存放的是签名信息，用来保证apk包的完整性和系统的安全;</p>
+</li>
+<li><p>res文件夹:存放apk用到的资源文件，如：图标，颜色定义等；</p>
+<p><img src="/2021/02/05/AndroidColumn/image-20210205073855388.png" alt="image-20210205073855388"></p>
+</li>
+<li><p>arsc文件：Android编译后生成的产物，主要是用来建立资源映射关系；</p>
+</li>
+<li><p>sha256文件：校验相关的，一般apk包里也没有；</p>
+</li>
+</ul>
+<h2 id="四大组件"><a href="#四大组件" class="headerlink" title="四大组件"></a>四大组件</h2><ul>
+<li>Activity 包含用户界面的组件，主要用于和用户进行交互；</li>
+<li>ContentProvider 用于在不同的应用程序之间实现数据共享功能；</li>
+<li>Service 实现程序后台运行的解决方案，非常适合那些不需要和用户交互而且还要求长期运行的任务；</li>
+<li>BroadcastReceiver Android中的广播机制；</li>
+</ul>
+<p>四大组件都需要在AndroidManifest注册才能起作用；</p>
+<h2 id="Activity生命周期"><a href="#Activity生命周期" class="headerlink" title="Activity生命周期"></a>Activity生命周期</h2><p><img src="/2021/02/05/AndroidColumn/IMG_C6B5DC689770-1.jpeg" alt="IMG_C6B5DC689770-1"></p>
+<p>1、比如一个activity正在处于界面能与用户交互，突然弹出来一个提醒对话框，抢走了之前activity的焦点，但是并没有完全将其遮蔽，那么前一个activity的状态转移是怎样的？</p>
+<p>onResume(能与用户交互)—&gt;onPause(由于弹出提醒对话框被夺走了焦点)</p>
+<ul>
+<li>如果此时用户X掉了对话框，切换回了之前的界面，那么应该走到onResume；</li>
+<li>如果此时用户放大的对话框，导致activity完全不可见，那么应该走到onStop；</li>
+</ul>
+<h2 id="ContentProvider"><a href="#ContentProvider" class="headerlink" title="ContentProvider"></a>ContentProvider</h2><p>ContentProvider提供了应用程序之间共享数据的方法；应用程序通过ContentProvider访问数据而不需要关心数据具体存储及访问过程，这样既提高了数据的访问效率，同时也保护了数据；</p>
+<p><img src="/2021/02/05/AndroidColumn/IMG_1FD13F738572-1.jpeg" alt="IMG_1FD13F738572-1"></p>
+<p>1、补充一个知识点：URL与URI的区别</p>
+<ul>
+<li>URL是标示资源的物理位置，相当于文件的路径，如<a href="http://www.baidu.com" target="_blank" rel="noopener">http://www.baidu.com</a></li>
+<li>URI则是标示资源的逻辑位置，并不提供资源的具体位置，如content://contract/people</li>
+</ul>
+<h2 id="Service"><a href="#Service" class="headerlink" title="Service"></a>Service</h2><p>Service是Android中实现程序后台运行的解决方案。但是服务并不是运行在一个独立的进程当中，而是依赖于创建服务时所在的应用程序进程，当某个应用程序进程被杀掉时，所有依赖于该进程的服务也会停止运行。</p>
+<h3 id="Android多线程编程"><a href="#Android多线程编程" class="headerlink" title="Android多线程编程"></a>Android多线程编程</h3><p>首先和许多其他的GUI库一样，Android的UI也是线程不安全的。如果想要更新应用程序中的UI元素，则必须在主线程中进行，否则就会出现异常。</p>
+<p><img src="/2021/02/05/AndroidColumn/image-20210214072108173.png" alt="image-20210214072108173"></p>
+<p>比如，直接在子线程中进行更新UI的操作，程序就会异常停止报“CalledFromWrongThreadException”；有些时候我们需要根据子线程的执行结果来更新相应的UI控件，那么应该怎么操作呢？Android的异步消息处理机制完美解决了这个问题，子线程中构造一个message对象，并通过handler的sendMessage方法将该对象发送出去，那么Handler就会收到这条消息，并在handleMessage方法中进行处理；而handleMessage方法中的代码就是在主线程中运行的，所以不会有上面的CalledFromWrongThreadException；</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> Handler handler = <span class="keyword">new</span> Handler() &#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handleMessage</span><span class="params">(Message msg)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">switch</span> (msg.what) &#123;</span><br><span class="line">                <span class="keyword">case</span> UPDATE_TEXT:</span><br><span class="line">                    <span class="comment">// 在这里可以进行UI操作</span></span><br><span class="line">                    text.setText(<span class="string">"Nice to meet you"</span>);</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">default</span>:</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="/2021/02/05/AndroidColumn/image-20210214072805210.png" alt="image-20210214072805210"></p>
+<h3 id="异步消息处理机制详解"><a href="#异步消息处理机制详解" class="headerlink" title="异步消息处理机制详解"></a>异步消息处理机制详解</h3><p>Android中的异步消息处理主要由四部分组成：</p>
+<ul>
+<li>Message: 用于线程之间传递消息，what子段，arg1、arg2、obj字段；</li>
+<li>Handler: 消息处理者，发送消息一般使用Handler的sendMessage方法，而发出的消息经过一系列辗转，最终会传递到Handler的handleMessage方法中；</li>
+<li>MessageQueue: 用于存放所有通过Handler发送的消息，每个线程中只会有一个MessageQueue对象；</li>
+<li>Looper: 每个线程中的MessageQueue的管家，调用Looper的loop方法后，就会进入到一个无限的循环当中，然后每当发现MessageQueue中存在一条消息，就会将它取出，并传递到Handler的handleMessage方法中。每个线程也只会有一个Looper对象；</li>
+</ul>
+<p><img src="/2021/02/05/AndroidColumn/IMG_D6D1AC18EFAE-1.png" alt="IMG_D6D1AC18EFAE-1"></p>
+<p>1、首先需要在主线程中创建一个Handler对象，并重写handleMessage方法；</p>
+<p>2、当子线程中的UI需要更新时，创建一个Message对象，并且通过Handler对象调用sendMessage方法，将这条消息发送出去；</p>
+<p>3、这条消息就被添加到MessageQueue队列中等待被处理，而Looper则会一直尝试从MessageQueue中取出待处理的消息，最后发回给Handler的handlerMessage方法中。</p>
+<p>4、由于Handler是在主线程中创建的，所以此时handleMessage方法中的代码也会在主线程中运行；</p>
+<h2 id="BroadcastReceiver"><a href="#BroadcastReceiver" class="headerlink" title="BroadcastReceiver"></a>BroadcastReceiver</h2><p>广播：标准广播、有序广播</p>
+<p>注册方式：动态注册、静态注册</p>
+<h3 id="如何创建一个广播接收器"><a href="#如何创建一个广播接收器" class="headerlink" title="如何创建一个广播接收器"></a>如何创建一个广播接收器</h3><p>只需要新建一个类，让它继承BroadcastReceiver，并重写父类的onReceive() 方法。这样当有广播到来时，onReceive方法就会得到执行，具体处理逻辑可以写在这个方法里；比如一个监听网络变化的程序：</p>
+<p>1、创建一个NetworkChangeReceiver类继承BroadcastReceiver</p>
+<p>2、重写onReceive方法处理逻辑就是弹出一个toast提示；</p>
+<p>3、创建一个IntentFilter对象实例，添加对网络状态变化的广播进行监听（当网络发生变化时，系统会发出一条值为android.net.conn.CONNECTIVITY_CHANGE的广播）</p>
+<p>4、注册广播registerReceiver传入两个参数，一个是BroadcastReceiver实例，一个是InterFilter实例；</p>
+<p>5、这样就写完了，当网络状态发生变化时，系统会发出一条广播，而这条广播被NetworkChangeReceiver监听到从而执行onReceive方法，弹出toast提示；</p>
+<p><img src="/2021/02/05/AndroidColumn/image-20210222072241380.png" alt="image-20210222072241380"></p>
+<h3 id="静态注册实现开机启动"><a href="#静态注册实现开机启动" class="headerlink" title="静态注册实现开机启动"></a>静态注册实现开机启动</h3><p>以上是动态注册的方法，写在了onCreate方法中，很明显只有应用程序启动之后注册语句才能够执行，但是如果我想要程序还没有启动就能接收到广播呢？比如我想要一个应用程序监听到开机的广播后能自动启动，这种情况就需要用到<strong>静态注册</strong>的方法了；</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">receiver</span></span></span><br><span class="line"><span class="tag">          <span class="attr">android:name</span>=<span class="string">".BootCompleteReceiver"</span></span></span><br><span class="line"><span class="tag">          <span class="attr">android:enabled</span>=<span class="string">"true"</span></span></span><br><span class="line"><span class="tag">          <span class="attr">android:exported</span>=<span class="string">"true"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">intent-filter</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">action</span> <span class="attr">android:name</span>=<span class="string">"android.intent.action.BOOT_COMPLETED"</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">intent-filter</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">receiver</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>比如定义一个BootCompleteReceiver来实现监听开机广播，直接在AndroidMinifest.xml中这样注册，然后就可以在BootCompleteReceiver的onReceive方法中实现监听到开机广播后你想要的逻辑了；</p>
+<h3 id="发送标准广播"><a href="#发送标准广播" class="headerlink" title="发送标准广播"></a>发送标准广播</h3><p>前面的广播都是系统发的，我们只是实现了广播监听；现在我们来自己发送一个广播，然后自己监听发送的广播；</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">receiver</span></span></span><br><span class="line"><span class="tag">          <span class="attr">android:name</span>=<span class="string">".MyBroadcastReceiver"</span></span></span><br><span class="line"><span class="tag">          <span class="attr">android:enabled</span>=<span class="string">"true"</span></span></span><br><span class="line"><span class="tag">          <span class="attr">android:exported</span>=<span class="string">"true"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">intent-filter</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">action</span> <span class="attr">android:name</span>=<span class="string">"com.example.broadcasttest.MY_BROADCAST"</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">intent-filter</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">receiver</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>静态方法注册监听，然后在代码中发送自定义的广播；</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_main);</span><br><span class="line">        Button button = findViewById(R.id.button);</span><br><span class="line">        button.setOnClickListener(<span class="keyword">new</span> View.OnClickListener() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View view)</span> </span>&#123;</span><br><span class="line">                Intent intent = <span class="keyword">new</span> Intent(<span class="string">"com.example.broadcasttest.MY_BROADCAST"</span>);</span><br><span class="line">                sendBroadcast(intent);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="发送有序广播"><a href="#发送有序广播" class="headerlink" title="发送有序广播"></a>发送有序广播</h3><p>相比于发送标准广播，只需要修改发送方式为sendOrderedBroadcast即可；比如: <code>sendOrderedBroadcast(intent, null)</code>, 第一个参数还是和之前一样，第二个参数表示与权限相关的字符串；</p>
+<p>有序广播可以通过设置接收器的优先级来决定由哪个接收器先接到广播</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">intent-filter</span> <span class="attr">android:priority</span>=<span class="string">"100"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">action</span> <span class="attr">android:name</span>=<span class="string">"com.example.broadcasttest.MY_BROADCAST"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">intent-filter</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>也可以在onReceive方法中调用<code>abortBroadcast</code>进行广播截断，这样后面的接收器就收不到这条广播了；</p>
+<h3 id="本地广播"><a href="#本地广播" class="headerlink" title="本地广播"></a>本地广播</h3><ul>
+<li><strong>只在程序内部使用，不用担心机密数据泄露</strong></li>
+<li><strong>其他的程序无法将广播发送到我们程序内部，不需要担心会有安全漏洞</strong></li>
+<li><strong>相比全局广播更高效</strong></li>
+</ul>
+<p>本地广播其实相比于之前所示改动点有两个：</p>
+<ol>
+<li><p>发送广播的方式，使用LocalBroadcastManager.sendBroadcast发送；如：<code>LocalBroadcastManager.sendBroadcast(intent);</code></p>
+</li>
+<li><p>注册本地监听器的方式，使用LocalBroadcastManager.registerReceiver注册，如：<code>LocalBroadcastManager.registerReceiver(localReceiver, intentFilter);</code></p>
+</li>
+</ol>
+<p>最后要注意一点：本地广播是无法通过静态注册的方式来接收的，这也可以理解。因为静态注册本身是为了让程序在未启动的时候也能接收广播，而发送本地广播时，我们的程序肯定是已经启动了的，所以也不需要使用静态注册的能力；</p>
+<h2 id="数据存储解决方案"><a href="#数据存储解决方案" class="headerlink" title="数据存储解决方案"></a>数据存储解决方案</h2><h2 id="遗留问题"><a href="#遗留问题" class="headerlink" title="遗留问题"></a>遗留问题</h2><p>1、项目下的build.gradle与app/build.gradle分别是什么文件？有什么作用？</p>
+<p>首先项目下的build.gradle是项目的全局构建脚本，通常这个文件是不需要修改的；repositories闭包一般都会声明google() 和jcenter()，分别对应google的扩展依赖库和jcenter三方开源库；声明了这两行的配置之后，就可以在项目中轻松引用任何google和jenter仓库中的依赖库了；</p>
+<p>然后dependencies闭包中使用classpath声明了两个插件：一个Gradle插件和一个Kotlin插件；</p>
+<p>gradle并不是专门为构建android项目开发的，Java、c++等多种项目也可以使用Gradle来构建，因此如果想使用它来构建Android项目，则需要声明这个插件；后面的2.3.3是插件的版本号，通常要和当前AndroidStudio的版本是对应的；另一个则表示kontlin插件，如果是Java版本的Android项目则不需要声明；</p>
+<p><img src="/2021/02/05/AndroidColumn/image-20210729073451961.png" alt="image-20210729073451961"></p>
+<p>app模块下的build.gradle是模块的构建脚本，这个文件中会指定很多项目构建相关的配置；</p>
+<p>com.android.application表示这是个应用模块而不是库模块，kotlin-android表示插件，如果是kotlin开发那么这个是必须要有的；applicationId是每个应用的唯一标识符，绝对不能重复，默认会使用在创建项目时指定的包名。testInstrumentationRunner 在当前项目中启用JUnit测试，可以为当前项目编写测试用例保证功能的正确性和稳定性；</p>
+<p>buildTypes闭包用于指定生成安装文件的相关配置，通常只会有两个子闭包：debug和release。debug用于生成指定测试版安装文件的配置，release用于生成正式版安装文件的配置；另外debug闭包是可以忽略不写的；minifyEnabled用于指定是否对项目的代码进行混淆，proguardFiles用于指定混淆时使用的规则文件；</p>
+<p>最后的dependencies闭包指定当前项目所有的依赖关系；通常Android Studio项目一共有3种依赖方式：</p>
+<ul>
+<li>本地依赖（比如第一行的fileTree 表示将libs目录下的所有.jar后缀的文件都添加到项目的构建路径中）</li>
+<li>库依赖（基本格式是implementation project后面加上要依赖的库的名称）</li>
+<li>远程依赖（androidx.appcompat:appcompat:1.1.0，分别表示域名，工程名，版本号）</li>
+</ul>
+<p><img src="/2021/02/05/AndroidColumn/Screen-Shot-2021-07-27-at-22.45.13.png" alt="Screen Shot 2021-07-27 at 22.45.13"></p>
+<p>2、java的文件流详细解析；</p>
+<p>参考文档：</p>
+<ol>
+<li><a href="https://developer.android.google.cn/guide?hl=zh_cn" target="_blank" rel="noopener">Android Developers</a></li>
+<li><a href="https://www.cnblogs.com/lao-liang/p/5067312.html" target="_blank" rel="noopener">Android系统启动分析</a></li>
+<li>《第一行代码》</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android%E4%B8%93%E6%A0%8F/" rel="tag"># Android专栏</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/01/31/multi-agent-simulation/" rel="next" title="【multi-agent-simulation】社会力模型演示">
+                <i class="fa fa-chevron-left"></i> 【multi-agent-simulation】社会力模型演示
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/02/15/theCleanCoder/" rel="prev" title="【The Clean Coder】">
+                【The Clean Coder】 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="weiwei" />
+            
+              <p class="site-author-name" itemprop="name">weiwei</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/weiwei-run" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:acweiwei_2019@foxmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#源起"><span class="nav-number">1.</span> <span class="nav-text">源起</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基础概念"><span class="nav-number">2.</span> <span class="nav-text">基础概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四大组件"><span class="nav-number">3.</span> <span class="nav-text">四大组件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Activity生命周期"><span class="nav-number">4.</span> <span class="nav-text">Activity生命周期</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ContentProvider"><span class="nav-number">5.</span> <span class="nav-text">ContentProvider</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Service"><span class="nav-number">6.</span> <span class="nav-text">Service</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Android多线程编程"><span class="nav-number">6.1.</span> <span class="nav-text">Android多线程编程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#异步消息处理机制详解"><span class="nav-number">6.2.</span> <span class="nav-text">异步消息处理机制详解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BroadcastReceiver"><span class="nav-number">7.</span> <span class="nav-text">BroadcastReceiver</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#如何创建一个广播接收器"><span class="nav-number">7.1.</span> <span class="nav-text">如何创建一个广播接收器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#静态注册实现开机启动"><span class="nav-number">7.2.</span> <span class="nav-text">静态注册实现开机启动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#发送标准广播"><span class="nav-number">7.3.</span> <span class="nav-text">发送标准广播</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#发送有序广播"><span class="nav-number">7.4.</span> <span class="nav-text">发送有序广播</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#本地广播"><span class="nav-number">7.5.</span> <span class="nav-text">本地广播</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据存储解决方案"><span class="nav-number">8.</span> <span class="nav-text">数据存储解决方案</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#遗留问题"><span class="nav-number">9.</span> <span class="nav-text">遗留问题</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">weiwei</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_uv">本站访客数<span id="busuanzi_value_site_uv"></span>人</span>
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'oSqBUhBjXDbxSFroCoJcqf17-gzGzoHsz',
+        appKey: 'HH2A3ygJPX4pr7HIR7BAi7UJ',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7}});</script></body>
+</html>
