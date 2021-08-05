@@ -135,7 +135,20 @@
 </li>
 </ol>
 <p>最后要注意一点：本地广播是无法通过静态注册的方式来接收的，这也可以理解。因为静态注册本身是为了让程序在未启动的时候也能接收广播，而发送本地广播时，我们的程序肯定是已经启动了的，所以也不需要使用静态注册的能力；</p>
-<h2 id="数据存储解决方案"><a href="#数据存储解决方案" class="headerlink" title="数据存储解决方案"></a>数据存储解决方案</h2><h2 id="遗留问题"><a href="#遗留问题" class="headerlink" title="遗留问题"></a>遗留问题</h2><p>1、项目下的build.gradle与app/build.gradle分别是什么文件？有什么作用？</p>
+<h2 id="数据存储解决方案"><a href="#数据存储解决方案" class="headerlink" title="数据存储解决方案"></a>数据存储解决方案</h2><ul>
+<li><p>文件存储</p>
+</li>
+<li><p>SharedPreferences存储</p>
+</li>
+<li><p>数据库存储</p>
+<p>文件存储用到的核心技术就是Context类提供的openFileInput和openFileOutput方法，之后就是通过各种流来进行读写操作；所有的文件默认存储到/data/data/<package name>/files/目录下；openFileInput方法传入文件名参数，系统会自动从/data/data/<package name>/files/目录下读取文件；</package></package></p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> fun <span class="title">save</span><span class="params">(inputText: String)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            val output = openFileOutput(<span class="string">"data"</span>, Context.MODE_PRIVATE);</span><br><span class="line">            val writer = BufferedWriter(OutputStreamWriter(output));</span><br><span class="line">            writer.use &#123;</span><br><span class="line">                it.write(inputText)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (e: IOException) &#123;</span><br><span class="line">            e.printStackTrace()</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> fun <span class="title">load</span><span class="params">()</span>: String </span>&#123;</span><br><span class="line">        val content = StringBuilder()</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            val input = openFileInput(<span class="string">"data"</span>)</span><br><span class="line">            val reader = BufferedReader(InputStreamReader(input))</span><br><span class="line">            reader.use &#123;</span><br><span class="line">                reader.forEachLine &#123;</span><br><span class="line">                    content.append(it)</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (e: IOException) &#123;</span><br><span class="line">            e.printStackTrace()</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> content.toString()</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>SharedPreferences是使用键值对方式来存储数据的，通常使用Context类中的getSharedPreferences方法或者Activity类中的getPreferences方法；SharedPreferences文件都是存放在/data/data/<package name>/shared_prefs/目录下的；</package></p>
+<p>// todo…</p>
+<h2 id="遗留问题"><a href="#遗留问题" class="headerlink" title="遗留问题"></a>遗留问题</h2><p>1、项目下的build.gradle与app/build.gradle分别是什么文件？有什么作用？</p>
 <p>首先项目下的build.gradle是项目的全局构建脚本，通常这个文件是不需要修改的；repositories闭包一般都会声明google() 和jcenter()，分别对应google的扩展依赖库和jcenter三方开源库；声明了这两行的配置之后，就可以在项目中轻松引用任何google和jenter仓库中的依赖库了；</p>
 <p>然后dependencies闭包中使用classpath声明了两个插件：一个Gradle插件和一个Kotlin插件；</p>
 <p>gradle并不是专门为构建android项目开发的，Java、c++等多种项目也可以使用Gradle来构建，因此如果想使用它来构建Android项目，则需要声明这个插件；后面的2.3.3是插件的版本号，通常要和当前AndroidStudio的版本是对应的；另一个则表示kontlin插件，如果是Java版本的Android项目则不需要声明；</p>
@@ -163,6 +176,41 @@
       </categories>
       <tags>
         <tag>Android专栏</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【RPM Packaging Guide】</title>
+    <url>/2020/08/31/RPMPackagingGuide/</url>
+    <content><![CDATA[<p>翻译《RPM Packaging Guide》顺便学习一下~</p>
+<a id="more"></a>
+
+<h1 id="绪论"><a href="#绪论" class="headerlink" title="绪论"></a>绪论</h1><p>RPM 打包指导文档：</p>
+<p><strong>准备打包需要的源代码</strong></p>
+<p>这部分为没有软件开发背景的人所写，详见：<a href>准备打包需要的软件</a></p>
+<p><strong>如何将源码打包成rpm包</strong></p>
+<p>这部分介绍将源码打包成rpm包，详见：<a href>打包软件</a></p>
+<p><strong>高级打包技巧</strong></p>
+<p>这部分提供给需要在复杂场景打包的人员作为参考材料，详见：<a href>高级用法</a></p>
+<h2 id="PDF-版本"><a href="#PDF-版本" class="headerlink" title="PDF 版本"></a>PDF 版本</h2><p>你可以在<a href="https://rpm-packaging-guide.github.io/rpm-packaging-guide.pdf" target="_blank" rel="noopener">这里</a>下载文档PDF版本 </p>
+<h2 id="文档规范"><a href="#文档规范" class="headerlink" title="文档规范"></a>文档规范</h2><p>本文使用如下规范：</p>
+<ul>
+<li><p>命令输入以及文本文件的内容，包括源代码以块的方式排列：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ tree ~&#x2F;rpmbuild&#x2F;</span><br><span class="line">&#x2F;home&#x2F;user&#x2F;rpmbuild&#x2F;</span><br><span class="line">|-- BUILD</span><br><span class="line">|-- RPMS</span><br><span class="line"></span><br><span class="line">[command output trimmed]</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Name:           bello</span><br><span class="line">Version:</span><br><span class="line">Release:        1%&#123;?dist&#125;</span><br><span class="line">Summary:</span><br><span class="line"></span><br><span class="line">[file contents trimmed]</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"></span><br><span class="line">print(<span class="string">"Hello World"</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>著作翻译</category>
+      </categories>
+      <tags>
+        <tag>rpm打包</tag>
       </tags>
   </entry>
   <entry>
@@ -204,41 +252,6 @@
       </categories>
       <tags>
         <tag>马赛克处理</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>【RPM Packaging Guide】</title>
-    <url>/2020/08/31/RPMPackagingGuide/</url>
-    <content><![CDATA[<p>翻译《RPM Packaging Guide》顺便学习一下~</p>
-<a id="more"></a>
-
-<h1 id="绪论"><a href="#绪论" class="headerlink" title="绪论"></a>绪论</h1><p>RPM 打包指导文档：</p>
-<p><strong>准备打包需要的源代码</strong></p>
-<p>这部分为没有软件开发背景的人所写，详见：<a href>准备打包需要的软件</a></p>
-<p><strong>如何将源码打包成rpm包</strong></p>
-<p>这部分介绍将源码打包成rpm包，详见：<a href>打包软件</a></p>
-<p><strong>高级打包技巧</strong></p>
-<p>这部分提供给需要在复杂场景打包的人员作为参考材料，详见：<a href>高级用法</a></p>
-<h2 id="PDF-版本"><a href="#PDF-版本" class="headerlink" title="PDF 版本"></a>PDF 版本</h2><p>你可以在<a href="https://rpm-packaging-guide.github.io/rpm-packaging-guide.pdf" target="_blank" rel="noopener">这里</a>下载文档PDF版本 </p>
-<h2 id="文档规范"><a href="#文档规范" class="headerlink" title="文档规范"></a>文档规范</h2><p>本文使用如下规范：</p>
-<ul>
-<li><p>命令输入以及文本文件的内容，包括源代码以块的方式排列：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ tree ~&#x2F;rpmbuild&#x2F;</span><br><span class="line">&#x2F;home&#x2F;user&#x2F;rpmbuild&#x2F;</span><br><span class="line">|-- BUILD</span><br><span class="line">|-- RPMS</span><br><span class="line"></span><br><span class="line">[command output trimmed]</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Name:           bello</span><br><span class="line">Version:</span><br><span class="line">Release:        1%&#123;?dist&#125;</span><br><span class="line">Summary:</span><br><span class="line"></span><br><span class="line">[file contents trimmed]</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"></span><br><span class="line">print(<span class="string">"Hello World"</span>)</span><br></pre></td></tr></table></figure>
-
-
-
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>著作翻译</category>
-      </categories>
-      <tags>
-        <tag>rpm打包</tag>
       </tags>
   </entry>
   <entry>
@@ -338,6 +351,35 @@
 ]]></content>
   </entry>
   <entry>
+    <title>【每天学点算法系列】链表与环的探究</title>
+    <url>/2020/10/26/listAndCircle/</url>
+    <content><![CDATA[<p>最近看了一点 Floyd cycle detection（弗洛伊德判圈算法），觉得有点意思，特此整理了一下…</p>
+<a id="more"></a>
+
+<p><strong>关于一个链表与环可能会遇到的问题</strong>：</p>
+<blockquote>
+<ol>
+<li>判断一个链表是否有环？</li>
+<li>找出环的起始位置；</li>
+<li>找出环的大小；</li>
+<li>求链表的长度：起始位置+环的大小</li>
+<li>如果存在环，求出环上任意一个节点最远的点</li>
+<li>如何判断两个无环链表是否相交</li>
+<li>如果相交，求出第一个相交的点；</li>
+</ol>
+</blockquote>
+<h3 id="判断一个链表是否有环"><a href="#判断一个链表是否有环" class="headerlink" title="判断一个链表是否有环"></a>判断一个链表是否有环</h3><p>快慢指针算法</p>
+<p>// loading…</p>
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>链表</tag>
+        <tag>环</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>【learn Git Branching】</title>
     <url>/2021/02/15/learnGitBranching/</url>
     <content><![CDATA[<p>Git作为程序员必备的技能，有些命令长时间不用就慢慢遗忘了比如<code>rebase -i</code>、<code>branch -f</code>，花了一个小时完了把游戏，强化这些命令…<a href="https://learngitbranching.js.org/?locale=zh_CN" target="_blank" rel="noopener">游戏入口传送门</a></p>
@@ -365,35 +407,6 @@
       </categories>
       <tags>
         <tag>git学习</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>【每天学点算法系列】链表与环的探究</title>
-    <url>/2020/10/26/listAndCircle/</url>
-    <content><![CDATA[<p>最近看了一点 Floyd cycle detection（弗洛伊德判圈算法），觉得有点意思，特此整理了一下…</p>
-<a id="more"></a>
-
-<p><strong>关于一个链表与环可能会遇到的问题</strong>：</p>
-<blockquote>
-<ol>
-<li>判断一个链表是否有环？</li>
-<li>找出环的起始位置；</li>
-<li>找出环的大小；</li>
-<li>求链表的长度：起始位置+环的大小</li>
-<li>如果存在环，求出环上任意一个节点最远的点</li>
-<li>如何判断两个无环链表是否相交</li>
-<li>如果相交，求出第一个相交的点；</li>
-</ol>
-</blockquote>
-<h3 id="判断一个链表是否有环"><a href="#判断一个链表是否有环" class="headerlink" title="判断一个链表是否有环"></a>判断一个链表是否有环</h3><p>快慢指针算法</p>
-<p>// loading…</p>
-]]></content>
-      <categories>
-        <category>算法</category>
-      </categories>
-      <tags>
-        <tag>链表</tag>
-        <tag>环</tag>
       </tags>
   </entry>
   <entry>
@@ -479,23 +492,6 @@
       </tags>
   </entry>
   <entry>
-    <title>【The Clean Coder】</title>
-    <url>/2021/02/15/theCleanCoder/</url>
-    <content><![CDATA[<p>花了大概2个小时，读完了Bob大叔的这本《代码整洁之道——程序员的职业素养》有种斜躺在沙发上整日阅读叔本华的感觉….</p>
-<a id="more"></a>
-
-<p>书中很多细节的表述直抵内心，比如妻子怀胎两月时自己被公司开除的羞愧；两周垒完一个应用+后台+存储时的狼狈；自己幼年参照手册完成逻辑门的欢呼雀跃～这些情节总是能对照自身找到共鸣。大学时为了加入acm班绞尽脑汁第一个写出找素数程序，还被同学夸奖说学得快；面试时作为物联网专业毕业生不知道iot的尴尬以及说不出什么是软件工程的羞愧；工作中技术分享会由于太紧张还有准备不充分被大佬怼得哑口无言… </p>
-<p>大学教育其实不能为我们带来职业素养，程序员真正重要的东西往往都是在职业发展中，在工作中，在一个个狼狈不堪的项目中学到的。这本书就像是为你讲述Bob大叔，这么一位人们公认的大神他的成长之路，你会觉得也不过如此，没有什么捷径，都是在辛勤的劳累和思考中获得的，我们也能做到。</p>
-<p>书中关于职业素养讲了很多，印象较深的有拒绝。懂得拒绝是职业素养很重要的一点。有时候迫于领导的权威，我们可能会答应，最后交付一堆烂代码，这是极其不负责任的。还有一个人的精力是有限的，如何做好时间管理，不要为了细枝末节浪费了你有限的魔力点数。关于日常要做卡塔练习，因为两个对手干架的时候，最先启动的是肌肉记忆，上层大脑的策略逻辑永远是慢一拍的。还有和团队的协作，工具的使用等等，强烈建议每个有志成为专业程序员的人都能通读一遍，从中受益。</p>
-]]></content>
-      <categories>
-        <category>读书笔记</category>
-      </categories>
-      <tags>
-        <tag>代码整洁之道</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>【multi-agent-simulation】社会力模型演示</title>
     <url>/2021/01/31/multi-agent-simulation/</url>
     <content><![CDATA[<p>近日有幸接触到robot跟随方面的研究，而跟随方向的论文大都提到了Social force model【社会力模型】，这个概念最早可追溯到Dirk Helbing在1995年的论文[Social force model for pedestrian dynamics]….</p>
@@ -520,6 +516,23 @@
       </categories>
       <tags>
         <tag>社会力模型</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【The Clean Coder】</title>
+    <url>/2021/02/15/theCleanCoder/</url>
+    <content><![CDATA[<p>花了大概2个小时，读完了Bob大叔的这本《代码整洁之道——程序员的职业素养》有种斜躺在沙发上整日阅读叔本华的感觉….</p>
+<a id="more"></a>
+
+<p>书中很多细节的表述直抵内心，比如妻子怀胎两月时自己被公司开除的羞愧；两周垒完一个应用+后台+存储时的狼狈；自己幼年参照手册完成逻辑门的欢呼雀跃～这些情节总是能对照自身找到共鸣。大学时为了加入acm班绞尽脑汁第一个写出找素数程序，还被同学夸奖说学得快；面试时作为物联网专业毕业生不知道iot的尴尬以及说不出什么是软件工程的羞愧；工作中技术分享会由于太紧张还有准备不充分被大佬怼得哑口无言… </p>
+<p>大学教育其实不能为我们带来职业素养，程序员真正重要的东西往往都是在职业发展中，在工作中，在一个个狼狈不堪的项目中学到的。这本书就像是为你讲述Bob大叔，这么一位人们公认的大神他的成长之路，你会觉得也不过如此，没有什么捷径，都是在辛勤的劳累和思考中获得的，我们也能做到。</p>
+<p>书中关于职业素养讲了很多，印象较深的有拒绝。懂得拒绝是职业素养很重要的一点。有时候迫于领导的权威，我们可能会答应，最后交付一堆烂代码，这是极其不负责任的。还有一个人的精力是有限的，如何做好时间管理，不要为了细枝末节浪费了你有限的魔力点数。关于日常要做卡塔练习，因为两个对手干架的时候，最先启动的是肌肉记忆，上层大脑的策略逻辑永远是慢一拍的。还有和团队的协作，工具的使用等等，强烈建议每个有志成为专业程序员的人都能通读一遍，从中受益。</p>
+]]></content>
+      <categories>
+        <category>读书笔记</category>
+      </categories>
+      <tags>
+        <tag>代码整洁之道</tag>
       </tags>
   </entry>
 </search>

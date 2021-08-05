@@ -147,7 +147,7 @@
 <meta property="og:image" content="http://weiwei.run/2021/02/05/AndroidColumn/image-20210729073451961.png">
 <meta property="og:image" content="http://weiwei.run/2021/02/05/AndroidColumn/Screen-Shot-2021-07-27-at-22.45.13.png">
 <meta property="article:published_time" content="2021-02-04T22:22:49.000Z">
-<meta property="article:modified_time" content="2021-07-28T23:38:23.137Z">
+<meta property="article:modified_time" content="2021-08-05T15:24:57.872Z">
 <meta property="article:author" content="weiwei">
 <meta property="article:tag" content="Android专栏">
 <meta name="twitter:card" content="summary">
@@ -579,7 +579,20 @@
 </li>
 </ol>
 <p>最后要注意一点：本地广播是无法通过静态注册的方式来接收的，这也可以理解。因为静态注册本身是为了让程序在未启动的时候也能接收广播，而发送本地广播时，我们的程序肯定是已经启动了的，所以也不需要使用静态注册的能力；</p>
-<h2 id="数据存储解决方案"><a href="#数据存储解决方案" class="headerlink" title="数据存储解决方案"></a>数据存储解决方案</h2><h2 id="遗留问题"><a href="#遗留问题" class="headerlink" title="遗留问题"></a>遗留问题</h2><p>1、项目下的build.gradle与app/build.gradle分别是什么文件？有什么作用？</p>
+<h2 id="数据存储解决方案"><a href="#数据存储解决方案" class="headerlink" title="数据存储解决方案"></a>数据存储解决方案</h2><ul>
+<li><p>文件存储</p>
+</li>
+<li><p>SharedPreferences存储</p>
+</li>
+<li><p>数据库存储</p>
+<p>文件存储用到的核心技术就是Context类提供的openFileInput和openFileOutput方法，之后就是通过各种流来进行读写操作；所有的文件默认存储到/data/data/<package name>/files/目录下；openFileInput方法传入文件名参数，系统会自动从/data/data/<package name>/files/目录下读取文件；</package></package></p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> fun <span class="title">save</span><span class="params">(inputText: String)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            val output = openFileOutput(<span class="string">"data"</span>, Context.MODE_PRIVATE);</span><br><span class="line">            val writer = BufferedWriter(OutputStreamWriter(output));</span><br><span class="line">            writer.use &#123;</span><br><span class="line">                it.write(inputText)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (e: IOException) &#123;</span><br><span class="line">            e.printStackTrace()</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> fun <span class="title">load</span><span class="params">()</span>: String </span>&#123;</span><br><span class="line">        val content = StringBuilder()</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            val input = openFileInput(<span class="string">"data"</span>)</span><br><span class="line">            val reader = BufferedReader(InputStreamReader(input))</span><br><span class="line">            reader.use &#123;</span><br><span class="line">                reader.forEachLine &#123;</span><br><span class="line">                    content.append(it)</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (e: IOException) &#123;</span><br><span class="line">            e.printStackTrace()</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> content.toString()</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>SharedPreferences是使用键值对方式来存储数据的，通常使用Context类中的getSharedPreferences方法或者Activity类中的getPreferences方法；SharedPreferences文件都是存放在/data/data/<package name>/shared_prefs/目录下的；</package></p>
+<p>// todo…</p>
+<h2 id="遗留问题"><a href="#遗留问题" class="headerlink" title="遗留问题"></a>遗留问题</h2><p>1、项目下的build.gradle与app/build.gradle分别是什么文件？有什么作用？</p>
 <p>首先项目下的build.gradle是项目的全局构建脚本，通常这个文件是不需要修改的；repositories闭包一般都会声明google() 和jcenter()，分别对应google的扩展依赖库和jcenter三方开源库；声明了这两行的配置之后，就可以在项目中轻松引用任何google和jenter仓库中的依赖库了；</p>
 <p>然后dependencies闭包中使用classpath声明了两个插件：一个Gradle插件和一个Kotlin插件；</p>
 <p>gradle并不是专门为构建android项目开发的，Java、c++等多种项目也可以使用Gradle来构建，因此如果想使用它来构建Android项目，则需要声明这个插件；后面的2.3.3是插件的版本号，通常要和当前AndroidStudio的版本是对应的；另一个则表示kontlin插件，如果是Java版本的Android项目则不需要声明；</p>
